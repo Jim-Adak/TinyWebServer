@@ -1,0 +1,8 @@
+//
+// Created by Adak Jim on 2026/2/27.
+//
+
+#ifndef TINYWEBSERVER_BUFFER_H
+#define TINYWEBSERVER_BUFFER_H
+
+#endif //TINYWEBSERVER_BUFFER_H
