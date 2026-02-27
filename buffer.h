@@ -14,6 +14,35 @@
 
 
 class Buffer {
+public:
+    Buffer(int initBuffSize=1024);
+    ~Buffer() = default;
+
+    size_t WritableBytes() const;
+    size_t ReadableBytes() const;
+    size_t PrependableBytes() const;
+
+    const char* Peek() const;
+    void ENsureWriteable(size_t len);
+    void HasWritten(size_t len);
+
+    void Retrieve(size_t len);
+    void RetrieneUntil(const char* end);
+
+    void RetrieveAll();
+    std::string RetrieveAllToStr();
+
+    const char* BeginWriteConst() const;
+    char* BeginWrite();
+
+    void Append(const std::string& str);
+    void Append(const char* str,size_t len);
+    void Append(const void* data,size_t len);
+    void Append(const Buffer& buff);
+
+    ssize_t ReadFd(int fd,int* Errno);
+    ssize_t WriteFd(int fd,int* Errno);
+
 private:
     char* BeginPtr_(); //buffer开头
     const char* BeginPtr_() const;
@@ -23,3 +52,7 @@ private:
     std::atomic<size_t> readPos_; //读的下标
     std::atomic<size_t> writePos_; //写的下标
 };
+
+
+
+#endif //BUFFER_H
