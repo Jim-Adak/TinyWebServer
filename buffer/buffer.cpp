@@ -14,4 +14,15 @@ size_t Buffer::WritableBytes() const {
     return buffer_.size() - writePos_;
 }
 
+//可读的数量，写下标 - 读下标
+size_t Buffer::ReadableBytes() const {
+    return writePos_ - readPos_;
+}
+
+//可预留的数量，已经读过的就没用了，等于读下标
+size_t Buffer::PrependableBytes() const {
+    return readPos_;
+}
+
+
 
