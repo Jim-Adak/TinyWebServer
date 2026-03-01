@@ -24,5 +24,18 @@ size_t Buffer::PrependableBytes() const {
     return readPos_;
 }
 
+const char* Buffer::Peak() const {
+    return &buffer_[readPos_];
+}
+
+//确保可写的长度
+void Buffer::ENsureWriteable(size_t len) {
+    if (len>WritableBytes()) {
+        MakeSpace_(len);
+    }
+    assert(len<=WritableBytes());
+}
+
+
 
 
