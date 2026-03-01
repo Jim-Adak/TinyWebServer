@@ -22,7 +22,9 @@ public:
     size_t ReadableBytes() const;
     size_t PrependableBytes() const;
 
-    const char* Peek() const;
+    const char *Peak() const;
+
+
     void ENsureWriteable(size_t len);
     void HasWritten(size_t len);
 
