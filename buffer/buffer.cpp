@@ -36,6 +36,13 @@ void Buffer::ENsureWriteable(size_t len) {
     assert(len<=WritableBytes());
 }
 
+//移动写下标，在Append中使用
+void Buffer::HasWritten(size_t len) {
+    writePos_ += len;
+}
+
+
+
 
 
 
