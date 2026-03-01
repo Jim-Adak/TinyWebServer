@@ -41,6 +41,10 @@ void Buffer::HasWritten(size_t len) {
     writePos_ += len;
 }
 
+//读取len长度,移动写下标
+void Buffer::Retrieve(size_t len) {
+    readPos_ +=len;
+}
 
 
 
