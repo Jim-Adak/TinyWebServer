@@ -65,6 +65,10 @@ std::string Buffer::RetrieveAllToStr() {
     return str;
 }
 
+//写指针的位置
+const char *Buffer::BeginWriteConst() const {
+    return &buffer_[writePos_];
+}
 
 
 
