@@ -70,6 +70,13 @@ const char *Buffer::BeginWriteConst() const {
     return &buffer_[writePos_];
 }
 
+char *Buffer::BeginWrite() {
+    return &buffer_[writePos_];
+}
+
+
+
+
 
 
 
