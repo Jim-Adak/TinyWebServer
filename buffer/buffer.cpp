@@ -58,6 +58,14 @@ void Buffer::RetrieveAll() {
     readPos_ = writePos_ =0;
 }
 
+//取出剩余可读的str
+std::string Buffer::RetrieveAllToStr() {
+    std::string str(Peek(),ReadableBytes());
+    RetrieveAll();
+    return str;
+}
+
+
 
 
 
