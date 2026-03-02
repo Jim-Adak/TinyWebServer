@@ -24,7 +24,7 @@ size_t Buffer::PrependableBytes() const {
     return readPos_;
 }
 
-const char* Buffer::Peak() const {
+const char* Buffer::Peek() const {
     return &buffer_[readPos_];
 }
 
@@ -44,6 +44,12 @@ void Buffer::HasWritten(size_t len) {
 //读取len长度,移动写下标
 void Buffer::Retrieve(size_t len) {
     readPos_ +=len;
+}
+
+//读取到end位置
+void Buffer::RetrieveUntil(const char* end) {
+    assert(Peek()<=end);
+    Retrieve(end - Peek()); //end指针 - 读指针长度
 }
 
 
