@@ -22,14 +22,14 @@ public:
     size_t ReadableBytes() const;
     size_t PrependableBytes() const;
 
-    const char *Peak() const;
+    const char *Peek() const;
 
 
     void ENsureWriteable(size_t len);
     void HasWritten(size_t len);
 
     void Retrieve(size_t len);
-    void RetrieneUntil(const char* end);
+    void RetrieveUntil(const char* end);
 
     void RetrieveAll();
     std::string RetrieveAllToStr();
