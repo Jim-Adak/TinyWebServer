@@ -78,8 +78,8 @@ char *Buffer::BeginWrite() {
 void Buffer::Append(const char* str,size_t len) {
     assert(str);
     EnsureWriteable(len);//确保可写的长度
-    std::copy(str,str+len,BeginWrite());
-
+    std::copy(str,str+len,BeginWrite()); //将str放到写下标开始的地方
+    HasWritten(len); //移动写下标
 }
 
 
