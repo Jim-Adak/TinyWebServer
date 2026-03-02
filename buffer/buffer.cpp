@@ -29,7 +29,7 @@ const char* Buffer::Peek() const {
 }
 
 //确保可写的长度
-void Buffer::ENsureWriteable(size_t len) {
+void Buffer::EnsureWriteable(size_t len) {
     if (len>WritableBytes()) {
         MakeSpace_(len);
     }
@@ -72,6 +72,14 @@ const char *Buffer::BeginWriteConst() const {
 
 char *Buffer::BeginWrite() {
     return &buffer_[writePos_];
+}
+
+//添加str到缓冲区
+void Buffer::Append(const char* str,size_t len) {
+    assert(str);
+    EnsureWriteable(len);//确保可写的长度
+    std::copy(str,str+len,BeginWrite());
+
 }
 
 

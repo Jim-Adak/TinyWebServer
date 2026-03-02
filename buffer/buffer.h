@@ -25,7 +25,7 @@ public:
     const char *Peek() const;
 
 
-    void ENsureWriteable(size_t len);
+    void EnsureWriteable(size_t len);
     void HasWritten(size_t len);
 
     void Retrieve(size_t len);
