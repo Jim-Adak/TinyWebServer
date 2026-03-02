@@ -119,6 +119,26 @@ ssize_t Buffer::ReadFd(int fd, int *Errno) {
    return len;
 }
 
+//将buffer中可读区域写入fd中
+ssize_t Buffer::WriteFd(int fd,int* Errno) {
+    ssize_t len = write(fd,Peek(),ReadableBytes());
+    if (len < 0) {
+        *Errno = errno;
+        return len;
+    }
+    Retrieve(len);
+    return len;
+}
+
+char *Buffer::BeginPtr_() {
+    return &buffer_[0];
+}
+
+const char *Buffer::BeginPtr_() const {
+    return &buffer_[0];
+}
+
+
 
 
 
