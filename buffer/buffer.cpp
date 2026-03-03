@@ -138,6 +138,20 @@ const char *Buffer::BeginPtr_() const {
     return &buffer_[0];
 }
 
+//扩展空间
+void Buffer::MakeSpace_(size_t len) {
+    if (WritableBytes() + PrependableBytes()<len) {
+        buffer_.resize(writePos_+len+1);
+    }else {
+        size_t readable = ReadableBytes();
+        std::copy(BeginPtr_() + readPos_,BeginPtr_() + writePos_,BeginPtr_());
+        readPos_ = 0;
+        writePos_ = readable;
+        assert(readable == ReadableBytes());
+    }
+}
+
+
 
 
 
