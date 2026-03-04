@@ -11,6 +11,20 @@
 
 template<typename T>
 class BlockQueue {
+public:
+    explicit BlockQueue(size_t maxsize = 1000);
+    ~BlockQueue();
+    bool empty();
+    bool full();
+    void push_back(const T& item);
+    void push_front(const T& item);
+    bool pop(T& item); //弹出的任务放item
+    bool opo(T& item,int timeout); //等待时间
+    void clear();
+    T front();
+    T back();
+    size_t capacity();
+    sieze_t size();
 private:
     deque<T> deq_; //底层数据结构
     mutex mtx_; //锁
