@@ -1,0 +1,8 @@
+//
+// Created by Adak Jim on 2026/3/4.
+//
+
+#ifndef TINYWEBSERVER_BLOCKQUEUE_H
+#define TINYWEBSERVER_BLOCKQUEUE_H
+
+#endif //TINYWEBSERVER_BLOCKQUEUE_H
