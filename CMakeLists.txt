@@ -4,6 +4,6 @@ project(TinyWebServer)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(TinyWebServer main.cpp
-        buffer/buffer.h
-        buffer/buffer.cpp
+        src/buffer/buffer.h
+        src/buffer/buffer.cpp
         )
