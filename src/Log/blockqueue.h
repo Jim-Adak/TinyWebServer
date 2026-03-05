@@ -25,6 +25,9 @@ public:
     T back();
     size_t capacity();
     sieze_t size();
+
+    void flush();
+    void Close();
 private:
     deque<T> deq_; //底层数据结构
     mutex mtx_; //锁
@@ -44,6 +47,10 @@ template<typename T>
 BlockQueue<T>::~BlockQueue() {
     Close();
 }
+
+template<typename T>
+void BlockQueue<T>::C
+
 
 
 #endif //TINYWEBSERVER_BLOCKQUEUE_H
