@@ -34,4 +34,11 @@ private:
     condition_variable condProducer_; //生产者条件变量
 };
 
+template<typename T>
+BlockQueue<T>::BlockQueue(size_t maxsize) : capacity_(maxsize) {
+    assert(maxsize > 0);
+    isClose_ = false;
+}
+
+
 #endif //TINYWEBSERVER_BLOCKQUEUE_H
