@@ -32,7 +32,7 @@ private:
     deque<T> deq_; //底层数据结构
     mutex mtx_; //锁
     bool isClose_; //关闭标志
-    size_t capacity; //容量
+    size_t capacity_; //容量
     condition_variable condConsumer_; //消费者条件变量
     condition_variable condProducer_; //生产者条件变量
 };
@@ -69,6 +69,13 @@ bool BlockQueue<T>::empty() {
     std::lock_guard<mutex> locker(mtx_);
     return deq_.empty();
 }
+
+template<typename T>
+bool BlockQueue<T>::full() {
+    std::lock_guard<mutex> locker(mtx_);
+    return deq_.size() >= capacity_;
+}
+
 
 
 
