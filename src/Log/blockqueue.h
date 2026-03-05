@@ -64,6 +64,13 @@ void BlockQueue<T>::clear() {
     deq_.clear();
 }
 
+template<typename T>
+bool BlockQueue<T>::empty() {
+    std::lock_guard<mutex> locker(mtx_);
+    return deq_.empty();
+}
+
+
 
 
 
