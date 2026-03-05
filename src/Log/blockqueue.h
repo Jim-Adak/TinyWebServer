@@ -40,5 +40,10 @@ BlockQueue<T>::BlockQueue(size_t maxsize) : capacity_(maxsize) {
     isClose_ = false;
 }
 
+template<typename T>
+BlockQueue<T>::~BlockQueue() {
+    Close();
+}
+
 
 #endif //TINYWEBSERVER_BLOCKQUEUE_H
