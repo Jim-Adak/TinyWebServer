@@ -58,6 +58,12 @@ void BlockQueue<T>::Close() {
     condProducer_.notify_all();
 }
 
+template<typename T>
+void BlockQueue<T>::clear() {
+    std::lock_guard<mutex> locker(mtx_);
+    deq_.clear();
+}
+
 
 
 
