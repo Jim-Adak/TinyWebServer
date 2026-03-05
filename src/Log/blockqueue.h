@@ -49,7 +49,15 @@ BlockQueue<T>::~BlockQueue() {
 }
 
 template<typename T>
-void BlockQueue<T>::C
+void BlockQueue<T>::Close() {
+    std::lock_guard<mutex> locker(mtx_); //操控队列之前，都需要上锁
+    deq_.clear(); //清空队列
+    clear();
+    isClose_ = true;
+    condConsumer_.notify_all();
+    condProducer_.notify_all();
+}
+
 
 
 
