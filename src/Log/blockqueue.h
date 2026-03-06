@@ -76,6 +76,15 @@ bool BlockQueue<T>::full() {
     return deq_.size() >= capacity_;
 }
 
+template<typename T>
+void BlockQueue<T>::push_back(const T &item) {
+    std::unique_lock<mutex> locker(mtx_);
+    while (deq_.size()>=capacity_) { //队列满了，需要等待
+        condProducer_.wait(locker); //暂停生产，等待消费者唤醒生产条件变量
+    }
+    deq_.push_front(item);
+    condConsumer_.notify_one(); //唤醒消费者
+}
 
 
 
