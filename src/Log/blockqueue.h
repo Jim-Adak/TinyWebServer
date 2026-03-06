@@ -86,6 +86,15 @@ void BlockQueue<T>::push_back(const T &item) {
     condConsumer_.notify_one(); //唤醒消费者
 }
 
+template<typename T>
+void BlockQueue<T>::push_front(const T &item) {
+    std::unique_lock<mutex> locker(mtx_);
+    while (deq_.size()>=capacity_) {
+        condProducer_.wait(locker);
+    }
+    deq_.push_front(item);
+    condConsumer_.notify_one();
+}
 
 
 
