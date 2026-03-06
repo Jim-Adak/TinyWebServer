@@ -96,6 +96,11 @@ void BlockQueue<T>::push_front(const T &item) {
     condConsumer_.notify_one();
 }
 
+template<typename T>
+bool BlockQueue<T>::pop(T &item) {
+    std::unique_lock<mutex> locker(mtx_);
+    while ()
+}
 
 
 
