@@ -50,7 +50,7 @@ BlockQueue<T>::~BlockQueue() {
 
 template<typename T>
 void BlockQueue<T>::Close() {
-    std::lock_guard<mutex> locker(mtx_); //操控队列之前，都需要上锁
+    std::lock_guard<std::mutex> locker(mtx_); //操控队列之前，都需要上锁
     deq_.clear(); //清空队列
     clear();
     isClose_ = true;
@@ -60,25 +60,25 @@ void BlockQueue<T>::Close() {
 
 template<typename T>
 void BlockQueue<T>::clear() {
-    std::lock_guard<mutex> locker(mtx_);
+    std::lock_guard<std::mutex> locker(mtx_);
     deq_.clear();
 }
 
 template<typename T>
 bool BlockQueue<T>::empty() {
-    std::lock_guard<mutex> locker(mtx_);
+    std::lock_guard<std::mutex> locker(mtx_);
     return deq_.empty();
 }
 
 template<typename T>
 bool BlockQueue<T>::full() {
-    std::lock_guard<mutex> locker(mtx_);
+    std::lock_guard<std::mutex> locker(mtx_);
     return deq_.size() >= capacity_;
 }
 
 template<typename T>
 void BlockQueue<T>::push_back(const T &item) {
-    std::unique_lock<mutex> locker(mtx_);
+    std::unique_lock<std::mutex> locker(mtx_);
     while (deq_.size()>=capacity_) { //队列满了，需要等待
         condProducer_.wait(locker); //暂停生产，等待消费者唤醒生产条件变量
     }
@@ -88,7 +88,7 @@ void BlockQueue<T>::push_back(const T &item) {
 
 template<typename T>
 void BlockQueue<T>::push_front(const T &item) {
-    std::unique_lock<mutex> locker(mtx_);
+    std::unique_lock<std::mutex> locker(mtx_);
     while (deq_.size()>=capacity_) {
         condProducer_.wait(locker);
     }
@@ -98,7 +98,7 @@ void BlockQueue<T>::push_front(const T &item) {
 
 template<typename T>
 bool BlockQueue<T>::pop(T &item) {
-    std::unique_lock<mutex> locker(mtx_);
+    std::unique_lock<std::mutex> locker(mtx_);
     while (deq_.empty()) {
         condConsumer_.wait(locker);  //队列空了，需要等待
     }
@@ -110,7 +110,7 @@ bool BlockQueue<T>::pop(T &item) {
 
 template<typename T>
 bool BlockQueue<T>::pop(T &item,int timeout) {
-    std::unique_lock<mutex> locker(mtx_);
+    std::unique_lock<std::mutex> locker(mtx_);
     while (deq_.empty()) {
         if (condConsumer_.wait_for(locker,std::chrono::seconds(timeout)) == std::cv_status::timeout) {
             return false;
@@ -124,6 +124,8 @@ bool BlockQueue<T>::pop(T &item,int timeout) {
     condProducer_.notify_one();
     return true;
 }
+
+template<typename T>
 
 
 
