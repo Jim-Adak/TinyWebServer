@@ -24,7 +24,7 @@ public:
     T front();
     T back();
     size_t capacity();
-    sieze_t size();
+    size_t size();
 
     void flush();
     void Close();
@@ -149,6 +149,7 @@ size_t BlockQueue<T>::size() {
     return deq_.size();
 }
 
+template<typename T>
 
 
 
