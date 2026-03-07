@@ -16,6 +16,9 @@
 #include"blockqueue.h"
 #include"../buffer/buffer.h"
 
+class Log {
+private:
 
+};
 
 #endif //TINYWEBSERVER_LOG_H
