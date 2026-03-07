@@ -150,6 +150,9 @@ size_t BlockQueue<T>::size() {
 }
 
 template<typename T>
+void BlockQueue<T>::flush() {
+    condConsumer_.notify_one(); //唤醒消费者
+}
 
 
 
