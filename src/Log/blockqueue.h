@@ -126,6 +126,11 @@ bool BlockQueue<T>::pop(T &item,int timeout) {
 }
 
 template<typename T>
+T BlockQueue<T>::front() {
+    std::lock_guard<std::mutex> locker(mtx_);
+    return deq_.front();
+}
+
 
 
 
