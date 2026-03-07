@@ -137,6 +137,13 @@ T BlockQueue<T>::back() {
     return deq_.back();
 }
 
+template<typename T>
+size_t BlockQueue<T>::capacity() {
+    std::lock_guard<std::mutex> locker(mtx_);
+    return deq_.size();
+}
+
+
 
 
 #endif //TINYWEBSERVER_BLOCKQUEUE_H
