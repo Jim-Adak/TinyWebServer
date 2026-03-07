@@ -29,12 +29,12 @@ public:
     void flush();
     void Close();
 private:
-    deque<T> deq_; //底层数据结构
-    mutex mtx_; //锁
+    std::deque<T> deq_; //底层数据结构
+    std::mutex mtx_; //锁
     bool isClose_; //关闭标志
     size_t capacity_; //容量
-    condition_variable condConsumer_; //消费者条件变量
-    condition_variable condProducer_; //生产者条件变量
+    std::condition_variable condConsumer_; //消费者条件变量
+    std::condition_variable condProducer_; //生产者条件变量
 };
 
 template<typename T>
