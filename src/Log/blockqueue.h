@@ -99,7 +99,13 @@ void BlockQueue<T>::push_front(const T &item) {
 template<typename T>
 bool BlockQueue<T>::pop(T &item) {
     std::unique_lock<mutex> locker(mtx_);
-    while ()
+    while (deq_.empty()) {
+        condConsumer_.wait(locker);  //队列空了，需要等待
+    }
+    item = deq_.front();
+    deq_.pop_front();
+    condProducer_.notify_one();
+    return true;
 }
 
 
