@@ -144,10 +144,11 @@ size_t BlockQueue<T>::capacity() {
 }
 
 template<typename T>
-sieze_t BlockQueue<T>::size() {
+size_t BlockQueue<T>::size() {
     std::lock_guard<std::mutex> locker(mtx_);
     return deq_.size();
 }
+
 
 
 
