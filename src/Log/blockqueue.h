@@ -131,7 +131,11 @@ T BlockQueue<T>::front() {
     return deq_.front();
 }
 
-
+template<typename T>
+T BlockQueue<T>::back() {
+    std::lock_guard<std::mutex> locker(mtx_);
+    return deq_.back();
+}
 
 
 
