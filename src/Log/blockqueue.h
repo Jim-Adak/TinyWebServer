@@ -140,8 +140,11 @@ T BlockQueue<T>::back() {
 template<typename T>
 size_t BlockQueue<T>::capacity() {
     std::lock_guard<std::mutex> locker(mtx_);
-    return deq_.size();
+    return capacity_;
 }
+
+template<typename T>
+
 
 
 
