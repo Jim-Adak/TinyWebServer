@@ -18,7 +18,33 @@
 
 class Log {
 private:
+    Log();
+    void AppendLogLevelTitle_(int level);
+    virtual ~Log();
+    void AsyncWrite_(); //异步写日志方法
+private:
+    static const int LOG_PATH_LEN = 256; //日志文件最长文件名
+    static const int LOG_NAME_LEN = 256; //日志最长名字
+    static const int MAX_LINES = 50000; //日志文件内的最长日志条数
 
+    const char* path_; //路径名
+    const char* suffix; //后缀名
+
+    int MAX_LINES_; //最大日志行数
+
+    int lineCount_; //日志行数记录
+    int toDay_; //按当天日期区分文件
+
+    bool isOpen_;
+
+    Buffer buff_; //输出的内容，缓冲区
+    int level_; //日志等级
+    bool isAsync_; //是否开启异步日志
+
+    FILE& fp;   //打开Log的文件指针
+    std::unique_ptr<BlockQueue<std::string>>deque_; //阻塞队列
+    std::unique_ptr<std::thread> writeThread_; //写线程的指针
+    std::mutex mtx_; //同步日志必需的互斥量
 };
 
 #endif //TINYWEBSERVER_LOG_H
