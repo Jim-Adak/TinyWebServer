@@ -22,6 +22,15 @@ public:
     void init(int level,const char* path = "./log",
               const char* suffix = ".log",
               int maxQueueCapacity = 1024);
+    static Log* Instance();
+    static void FlushLogThread(); //异步写日志方法，调用私有方法asyncWrite
+
+    void write(int level,const char* format,...); //将输出内容按照标准格式整理
+    void flush();
+
+    int GetLevel;
+    void SetLevel(int level);
+    bool isOpen(){ return isOpen_;}
 private:
     Log();
     void AppendLogLevelTitle_(int level);
