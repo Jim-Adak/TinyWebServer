@@ -26,3 +26,11 @@ Log::~Log() {
         fclose(fp_); //关闭日志文件
     }
 }
+
+//唤醒阻塞队列消费者，开始写日志
+void Log::flush() {
+    if (isAsync_) { //只有异步日志才会用到deque
+        deque_->flush();
+    }
+    fflush(fp_); //清空输入缓冲区
+}
