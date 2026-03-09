@@ -45,3 +45,11 @@ Log* Log::Instance() {
 void Log::FlushLogThread() {
     Log::Instance()->AsyncWrite_();
 }
+
+//写线程真正的执行函数
+void Log::AsyncWrite_() {
+    std::string str = "";
+    while (deque_->pop(str)) {
+        fputs(str.c_str(), fp_);
+    }
+}
