@@ -34,3 +34,9 @@ void Log::flush() {
     }
     fflush(fp_); //清空输入缓冲区
 }
+
+//懒汉模式 局部静态变量法(这种方法不需要加锁和解锁操作）
+Log* Log::Instance() {
+    static Log log;
+    return &log;
+}
