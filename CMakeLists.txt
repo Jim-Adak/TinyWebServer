@@ -7,4 +7,5 @@ add_executable(TinyWebServer main.cpp
         src/buffer/buffer.h
         src/buffer/buffer.cpp
         src/Log/Log.h
+        src/Log/Log.cpp
 )
