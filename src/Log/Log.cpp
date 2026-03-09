@@ -40,3 +40,8 @@ Log* Log::Instance() {
     static Log log;
     return &log;
 }
+
+//异步日志的写线程函数
+void Log::FlushLogThread() {
+    Log::Instance()->AsyncWrite_();
+}
