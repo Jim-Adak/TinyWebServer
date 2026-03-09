@@ -30,7 +30,7 @@ public:
 
     int GetLevel;
     void SetLevel(int level);
-    bool isOpen(){ return isOpen_;}
+    bool IsOpen() { return isOpen_;}
 private:
     Log();
     void AppendLogLevelTitle_(int level);
