@@ -42,7 +42,7 @@ private:
     static const int MAX_LINES = 50000; //日志文件内的最长日志条数
 
     const char* path_; //路径名
-    const char* suffix; //后缀名
+    const char* suffix_; //后缀名
 
     int MAX_LINES_; //最大日志行数
 
