@@ -66,10 +66,10 @@ void Log::init(int level, const char *path, const char *suffix, int maxQueueCapa
             std::unique_ptr<BlockQueue<std::string>> newQue(new BlockQueue<std::string>);
             //因为unique_ptr不支持普通的拷贝或赋值操作，所以采用move
             //将动态申请的内存权给deque，newDeque被释放
-            deque_ = move(newQue); //左值变右值，掏空newDeque
+            deque_ = std::move(newQue); //左值变右值，掏空newDeque
 
             std::unique_ptr<std::thread> newThread(new std::thread(FlushLogThread));
-            writeThread_ = move(newThread);
+            writeThread_ = std::move(newThread);
         }
     }else {
         isAsync_ = false;
@@ -98,3 +98,6 @@ void Log::init(int level, const char *path, const char *suffix, int maxQueueCapa
     }
 
 }
+
+
+
