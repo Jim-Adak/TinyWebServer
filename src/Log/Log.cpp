@@ -53,3 +53,48 @@ void Log::AsyncWrite_() {
         fputs(str.c_str(), fp_);
     }
 }
+
+//初始化日志
+void Log::init(int level, const char *path, const char *suffix, int maxQueueCapacity) {
+    isAsync_ = true;
+    level_ = level;
+    path_ = path;
+    suffix_ = suffix;
+    if (maxQueueCapacity > 0) { //异步日志
+        isAsync_ = true;
+        if (!deque_) { //为空则创建一个
+            std::unique_ptr<BlockQueue<std::string>> newQue(new BlockQueue<std::string>);
+            //因为unique_ptr不支持普通的拷贝或赋值操作，所以采用move
+            //将动态申请的内存权给deque，newDeque被释放
+            deque_ = move(newQue); //左值变右值，掏空newDeque
+
+            std::unique_ptr<std::thread> newThread(new std::thread(FlushLogThread));
+            writeThread_ = move(newThread);
+        }
+    }else {
+        isAsync_ = false;
+    }
+    lineCount_ = 0;
+    time_t timer  =time(nullptr);
+    struct tm* systime = localtime(&timer);
+    char fileName[LOG_NAME_LEN] = {0};
+    std::snprintf(fileName,LOG_NAME_LEN - 1, "%s/%04d_%02d_%02d%s",
+              path_,systime->tm_year + 1900,systime->tm_mon + 1,systime->tm_mday,suffix_);
+    toDay_ = systime->tm_mday;
+
+    {
+       std::lock_guard<std::mutex> locker(mtx_);
+        buff_.RetrieveAll();
+        if (fp_) { //重新打开
+            flush();
+            fclose(fp_);
+        }
+        fp_ = fopen(fileName,"a"); //打开文件读取并附加写入
+        if (fp_ == nullptr) {
+            std::mkdir(fileName,0777); //Linux环境下
+            fp_ = fopen(fileName,"a"); //生成目录文件
+        }
+        assert(fp_ != nullptr);
+    }
+
+}
