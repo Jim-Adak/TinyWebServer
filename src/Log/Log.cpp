@@ -147,6 +147,14 @@ void Log::write(int level, const char *format, ...) {
         va_end(vaList);
 
         buff_.HasWritten(m);
+        buff_.Append("\n\0", 2);
+
+        if (isAsync_ && deque_ && !deque_->full()) { //异步方式（加入阻塞队列中，等待写线程读取日志信息）
+            deque_->push_back(buff_.RetrieveAllToStr());
+        }else { //同步方式（直接向文件中写入日志信息）
+            fputs(buff_.Peek(),fp_);
+        }
+        buff_.RetrieveAll(); //清空buff
     }
 }
 
