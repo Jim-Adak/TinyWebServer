@@ -29,7 +29,7 @@ public:
     void write(int level,const char* format,...); //将输出内容按照标准格式整理
     void flush();
 
-    int GetLevel;
+    int GetLevel();
     void SetLevel(int level);
     bool IsOpen() { return isOpen_;}
 private:
