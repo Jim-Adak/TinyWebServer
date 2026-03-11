@@ -1,0 +1,8 @@
+//
+// Created by Confuse on 2026/3/11.
+//
+
+#ifndef TINYWEBSERVER_THREADPOOL_H
+#define TINYWEBSERVER_THREADPOOL_H
+
+#endif //TINYWEBSERVER_THREADPOOL_H

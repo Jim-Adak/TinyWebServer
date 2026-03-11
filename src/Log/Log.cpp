@@ -49,7 +49,7 @@ void Log::FlushLogThread() {
 //写线程真正的执行函数
 void Log::AsyncWrite_() {
     std::string str = "";
-    while (deque_->pop(str)) {
+    while(deque_->pop(str)) {
         fputs(str.c_str(), fp_);
     }
 }
@@ -177,6 +177,16 @@ void Log::AppendLogLevelTitle_(int level) {
             buff_.Append("[Info]",9);
             break;
     }
+}
+
+int Log::GetLevel() {
+    std::lock_guard<std::mutex> locker(mtx_);
+    return level_;
+}
+
+void Log::SetLevel(int level) {
+    std::lock_guard<std::mutex> locker(mtx_);
+    level_ = level;
 }
 
 
