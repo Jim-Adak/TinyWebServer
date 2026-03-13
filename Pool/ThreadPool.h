@@ -18,7 +18,7 @@ public:
     ThreadPool(ThreadPool&&) = default;
     //尽量使用make_shared代替new，如果通过new再传递给shared_ptr，内存是不连续的，会造成内存碎片化
     explicit ThreadPool(int ThreadCount = 8) : pool_(std::make_shared<Pool>()) {  //make_shared传递右值，功能是在动态内存中分配一个对象并初始化它，返回指向此对象的shared_ptr
-
+        assert(ThreadCount > 0);
     }
 private:
     //用一个结构体封装起来，方便调用
