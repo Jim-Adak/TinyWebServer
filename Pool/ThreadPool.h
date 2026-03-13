@@ -14,6 +14,8 @@
 
 class ThreadPool {
 public:
+    ThreadPool() = default;
+    ThreadPool(ThreadPool&&) = default;
 private:
     //用一个结构体封装起来，方便调用
     struct Pool {
