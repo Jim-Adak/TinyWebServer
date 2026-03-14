@@ -38,6 +38,14 @@ public:
             }).detach();
         }
     }
+
+    ~ThreadPool() {
+        if (pool_) {
+            std::unique_lock<std::mutex> locker(pool_->mtx_);
+            pool_->isClosed = true;
+        }
+        pool_->cond_.notify_all(); //唤醒所有的线程
+    }
 private:
     //用一个结构体封装起来，方便调用
     struct Pool {
