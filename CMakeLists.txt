@@ -9,4 +9,5 @@ add_executable(TinyWebServer main.cpp
         src/Log/Log.h
         src/Log/Log.cpp
         Pool/ThreadPool.h
+        Pool/sqlconnpool.h
 )
