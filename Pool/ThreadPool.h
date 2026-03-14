@@ -46,6 +46,13 @@ public:
         }
         pool_->cond_.notify_all(); //唤醒所有的线程
     }
+
+    template<typename T>
+    void AddTask(T&& task) {
+        std::unique_lock<std::mutex> locker(pool_->mtx_);
+        pool_->tasks.emplace(std::forward<T>(task));
+        pool_->cond_.notify_one();
+    }
 private:
     //用一个结构体封装起来，方便调用
     struct Pool {
