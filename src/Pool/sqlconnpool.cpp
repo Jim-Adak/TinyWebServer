@@ -43,3 +43,11 @@ MYSQL* SqlConnPool::GetConn() {
     connQue_.pop();
     return conn;
 }
+
+//存入连接池，实际上并没有关闭
+void SqlConnPool::FreeConn(MYSQL* conn) {
+    assert(conn);
+    std::lock_guard<std::mutex> locker(mtx_);
+    connQue_.push(conn);
+    sem_post(&semId_); //+1
+}
