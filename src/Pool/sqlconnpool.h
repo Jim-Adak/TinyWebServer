@@ -6,6 +6,12 @@
 #define TINYWEBSERVER_SQLCONNPOOL_H
 
 #include<mysql.h>
+#include<string>
+#include<queue>
+#include<mutex>
+#include<semaphore.h>
+#include<thread>
+#include<../>
 
 
 #endif //TINYWEBSERVER_SQLCONNPOOL_H
