@@ -13,5 +13,11 @@
 #include<thread>
 #include"../Log/Log.h"
 
+class SqlConnPool {
+private:
+    SqlConnPool() = default;
+    ~SqlConnPool() = default;
+};
+
 
 #endif //TINYWEBSERVER_SQLCONNPOOL_H
