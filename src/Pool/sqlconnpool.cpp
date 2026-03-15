@@ -22,5 +22,12 @@ void SqlConnPool::Init(const char* host,int port,
             assert(conn);
         }
         conn = mysql_real_connect(conn,host,user,pwd,dbName,port,nullptr,0);
+        if (!conn) {
+            LOG_ERROR("MySql Connect error!");
+        }
+        connQue_.emplace(conn);
     }
+    MAX_CONN_ = connSize;
+    sem_init(&semId_,0,MAX_CONN_);
 }
+
