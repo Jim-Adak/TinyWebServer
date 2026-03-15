@@ -31,3 +31,15 @@ void SqlConnPool::Init(const char* host,int port,
     sem_init(&semId_,0,MAX_CONN_);
 }
 
+MYSQL* SqlConnPool::GetConn() {
+    MYSQL* conn = nullptr;
+    if (connQue_.empty()) {
+        LOG_WARN("SqlConnPool busy~");
+        return nullptr;
+    }
+    sem_wait(&semId_); //-1
+    std::lock_guard<std::mutex> locker(mtx_);
+    conn = connQue_.front();
+    connQue_.pop();
+    return conn;
+}
