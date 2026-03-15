@@ -32,5 +32,10 @@ private:
     sem_t semId_;
 };
 
+//资源在对象构造初始化，资源在对象析构时释放
+class SqlConnRAII {
+
+};
+
 
 #endif //TINYWEBSERVER_SQLCONNPOOL_H
