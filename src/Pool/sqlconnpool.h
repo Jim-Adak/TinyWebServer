@@ -14,9 +14,22 @@
 #include"../Log/Log.h"
 
 class SqlConnPool {
+public:
+    static SqlConnPool* Instance();
+
+    MYSQL* GetConn();
+    void Init(const char* host,int port,
+              const char* user,const char* pwd,
+              const char* dbName,int connSize);
+    void ClosePool();
 private:
     SqlConnPool() = default;
     ~SqlConnPool() = default;
+
+    int MAX_CONN_;
+    std::queue<MYSQL *> connQue_;
+    std::mutex mtx_;
+    sem_t semId_;
 };
 
 
