@@ -51,3 +51,8 @@ void SqlConnPool::FreeConn(MYSQL* conn) {
     connQue_.push(conn);
     sem_post(&semId_); //+1
 }
+
+int SqlConnPool::GetFreeConnCount() {
+    std::lock_guard<std::mutex> locker(mtx_);
+    return connQue_.size();
+}
