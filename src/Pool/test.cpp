@@ -23,4 +23,14 @@ void TestLog() {
             }
         }
     }
+    cnt = 0;
+    Log::Instance()->init(level,"./testlog2",".log",5000);
+    for (level = 0; level < 4; level++) {
+        Log::Instance()->SetLevel(level);
+        for (int j = 0; j< 10000; j++) {
+            for (int i = 0;i<4; i++) {
+                LOG_BASE(i,"&s 2222222 &d ==============","Test",cnt++);
+            }
+        }
+    }
 }
