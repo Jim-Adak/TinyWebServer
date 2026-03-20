@@ -34,3 +34,12 @@ void TestLog() {
         }
     }
 }
+
+void ThreadLogTask(int i,int cnt) {
+    Log::Instance()->init(0,"./testThreaddpool",".log",5000);
+    ThreadPool threadpool(6);
+    for (int i=0;i<18;i++) {
+        threadpool.AddTask(std::bind(ThreadLogTask, i % 4,i * 10000));
+    }
+    getchar();
+}
