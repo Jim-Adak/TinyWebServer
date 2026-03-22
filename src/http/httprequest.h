@@ -22,6 +22,23 @@ public:
         BODY,
         FINISH,
     };
+
+    HttpRequest() { Init();}
+    ~HttpRequest() = default;
+
+    void Init();
+    bool parse(Buffer &buff);
+
+    std::string path() const;
+    std::string& path();
+    std::string method() const;
+    std::string version() const;
+    std::string GetPost(const std::string& key) const;
+    std::string GetPost(const char* key) const;
+
+    bool IsKeepAlive() const;
+
+
 private:
     bool ParseRequest(const std::string& line); //处理请求行
     void ParseHeader(const std::string& line); //处理请求头
