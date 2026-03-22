@@ -24,6 +24,7 @@ private:
     void ParsePost_(); //处理Post事件
     void ParseFromUrlencoded_(); //从url中解析编码
 
+    static bool UserVerify(const std::string& name,const std::string& pwd,bool isLogin); //用户验证
 
 
 };
