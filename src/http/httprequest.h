@@ -14,6 +14,11 @@
 #include"../Log/Log.h"
 #include"../Pool/sqlconnpool.h"
 
-
+class HttpRequest {
+private:
+    bool ParseRequest(const std::string& line); //处理请求行
+    void ParseHeader(const std::string& line); //处理请求头
+    void ParseBody_(const std::string& line); //处理请求体
+};
 
 #endif //TINYWEBSERVER_HTTPREQUEST_H
