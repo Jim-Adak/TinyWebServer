@@ -19,6 +19,13 @@ private:
     bool ParseRequest(const std::string& line); //处理请求行
     void ParseHeader(const std::string& line); //处理请求头
     void ParseBody_(const std::string& line); //处理请求体
+
+    void ParsePath_(); //处理请求路径
+    void ParsePost_(); //处理Post事件
+    void ParseFromUrlencoded_(); //从url中解析编码
+
+
+
 };
 
 #endif //TINYWEBSERVER_HTTPREQUEST_H
