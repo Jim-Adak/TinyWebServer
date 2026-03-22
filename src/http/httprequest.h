@@ -1,0 +1,8 @@
+//
+// Created by Confuse on 2026/3/22.
+//
+
+#ifndef TINYWEBSERVER_HTTPREQUEST_H
+#define TINYWEBSERVER_HTTPREQUEST_H
+
+#endif //TINYWEBSERVER_HTTPREQUEST_H
