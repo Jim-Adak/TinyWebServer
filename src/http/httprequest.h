@@ -15,6 +15,13 @@
 #include"../Pool/sqlconnpool.h"
 
 class HttpRequest {
+public:
+    enum PASTE_STATE {
+        REQUEST_LINE,
+        HEADERS,
+        BODY,
+        FINISH,
+    };
 private:
     bool ParseRequest(const std::string& line); //处理请求行
     void ParseHeader(const std::string& line); //处理请求头
