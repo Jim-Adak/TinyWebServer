@@ -16,7 +16,7 @@
 
 class HttpRequest {
 public:
-    enum PASTE_STATE {
+    enum PARSE_STATE {
         REQUEST_LINE,
         HEADERS,
         BODY,
