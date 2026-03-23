@@ -40,8 +40,8 @@ public:
 
 
 private:
-    bool ParseRequest(const std::string& line); //处理请求行
-    void ParseHeader(const std::string& line); //处理请求头
+    bool ParseRequestLine_(const std::string& line); //处理请求行
+    void ParseHeader_(const std::string& line); //处理请求头
     void ParseBody_(const std::string& line); //处理请求体
 
     void ParsePath_(); //处理请求路径
