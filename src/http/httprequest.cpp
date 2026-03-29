@@ -57,5 +57,7 @@ bool HttpRequest::parse(Buffer &buff) {
         if (lineEnd == buff.BeginWrite()){break;} //读完了
         buff.RetrieveUntil(lineEnd + 2); //跳过回车换行
     }
+    LOG_DEBUG("[%s], [%s], [%s]", method_.c_str(), path_.c_str(), version_.c_str());
+    return true;
 }
 
