@@ -106,3 +106,10 @@ void HttpRequest::ParseBody_(const std::string &line) {
     state_ = FINISH; //状态转换为FINISH
     LOG_DEBUG("Body:&s,len:%d",line.c_str(),line.size());
 }
+
+//16进制转换为10进制
+int HttpRequest::ConverHex(char ch) {
+    if (ch>='A' && ch<='F') return ch-'A' + 10;
+    if (ch>='a' && ch<='f') return ch-'a' + 10;
+    return ch;
+}
