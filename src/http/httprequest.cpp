@@ -99,3 +99,10 @@ void HttpRequest::ParseHeader_(const std::string &line) {
         state_ = BODY; //转换为下一个状态
     }
 }
+
+void HttpRequest::ParseBody_(const std::string &line) {
+    body_ = line;
+    ParsePost_();
+    state_ = FINISH; //状态转换为FINISH
+    LOG_DEBUG("Body:&s,len:%d",line.c_str(),line.size());
+}
