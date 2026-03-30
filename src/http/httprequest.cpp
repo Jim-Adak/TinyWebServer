@@ -61,3 +61,16 @@ bool HttpRequest::parse(Buffer &buff) {
     return true;
 }
 
+//解析路径
+void HttpRequest::ParsePath_() {
+    if (path_ == "/") {
+        path_ = "/index.html";
+    }else {
+        for (auto &item: DEFAULT_HTML) {
+            if (item == path_) {
+                path_+=".html";
+                break;
+            }
+        }
+    }
+}
