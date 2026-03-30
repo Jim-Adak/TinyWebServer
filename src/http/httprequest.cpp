@@ -74,3 +74,18 @@ void HttpRequest::ParsePath_() {
         }
     }
 }
+
+bool HttpRequest::ParseRequestLine_(const std::string &line) {
+    std::regex patten("^([^ ]*) ([^ ]*) HTTP/([^ ]*)$");
+    std::smatch subMatch;
+    //在匹配规则中，以括号()的方式来划分组别，一共三个括号 [0]表示整体
+    if (regex_match(line,subMatch,patten)) { //匹配指定字符串是否符合
+        method_ = subMatch[1];
+        path_ = subMatch[2];
+        version_ = subMatch[3];
+        state_ = HEADERS;  //状态转换为下一个状态
+        return true;
+    }
+    LOG_ERROR("RequestLine Error");
+    return false;
+}
