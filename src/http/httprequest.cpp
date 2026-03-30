@@ -89,3 +89,13 @@ bool HttpRequest::ParseRequestLine_(const std::string &line) {
     LOG_ERROR("RequestLine Error");
     return false;
 }
+
+void HttpRequest::ParseHeader_(const std::string &line) {
+    std::regex patten("^([^:]*): ?(.*)$");
+    std::smatch subMatch;
+    if (std::regex_match(line, subMatch,patten)) {
+        header_[subMatch[1]] = subMatch[2];
+    }else {
+        state_ = BODY; //转换为下一个状态
+    }
+}
