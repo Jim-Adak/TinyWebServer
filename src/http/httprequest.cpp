@@ -132,3 +132,46 @@ void HttpRequest::ParsePost_() {
         }
     }
 }
+
+//从url中解析编码
+void HttpRequest::ParseFromUrlencoded_() {
+    if (body_.size() == 0) return;
+
+    std::string key,value;
+    int num = 0;
+    int n = body_.size();
+    int i = 0,j = 0;
+    for (;i<n;i++) {
+        char ch = body_[i];
+        switch (ch) {
+            //key
+            case '=':
+                key = body_.substr(j,i-1);
+                j = i + 1;
+                break;
+            //键值对中的空格换伟+或者20%
+            case '+':
+                body_[i] = ' ';
+                break;
+            case '%':
+                num = ConverHex(body_[i+1])*16 + ConverHex(body_[i+2]);
+                body_[i + 1] = num / 10 + '0';
+                i += 2;
+                break;
+                // 键值对连接符
+            case '&':
+                value = body_.substr(j, i - j);
+                j = i + 1;
+                post_[key] = value;
+                LOG_DEBUG("%s = %s", key.c_str(), value.c_str());
+                break;
+            default:
+                break;
+        }
+    }
+    assert(j <= i);
+    if (post_.count(key) == 0 && j < i){
+        value = body_.substr(j,i-j);
+        post_[key] = value;
+    }
+}
