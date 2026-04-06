@@ -241,3 +241,27 @@ std::string HttpRequest::path() const {
 std::string HttpRequest::path() {
     return path_;
 }
+
+std::string HttpRequest::method() const {
+    return method_;
+}
+
+std::string HttpRequest::version() const {
+    return version_;
+}
+
+std::string HttpRequest::GetPost(const std::string& key) const {
+    assert(key != ""); //判断是否为空
+    if (post_.count(key) == 1) {
+        return post_.find(key)->second;
+    }
+    return "";
+}
+
+std::string HttpRequest::GetPost(const char* key) const {
+    assert(key != nullptr);
+    if (post_.count(key) == 1) {
+        return post_.find(key)->second;
+    }
+    return "";
+}
