@@ -30,7 +30,7 @@ public:
     bool parse(Buffer &buff);
 
     std::string path() const;
-    std::string& path();
+    std::string path();
     std::string method() const;
     std::string version() const;
     std::string GetPost(const std::string& key) const;

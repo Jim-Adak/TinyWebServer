@@ -233,3 +233,11 @@ bool HttpRequest::UserVerify(const std::string &name,const std::string &pwd,bool
     LOG_DEBUG("UserVerify success!!");
     return flag;
     }
+
+std::string HttpRequest::path() const {
+    return path_;
+}
+
+std::string HttpRequest::path() {
+    return path_;
+}
