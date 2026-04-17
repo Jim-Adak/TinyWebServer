@@ -52,3 +52,16 @@ HttpResponse::HttpResponse() {
 HttpResponse::~HttpResponse() {
     UnmapFile();
 }
+
+void HttpResponse::Init(const string& srcDir,string& path,bool isKeepAlive,int code) {
+    assert(srcDir != "");
+    if (mmFile_) { UnmapFile(); }
+    code_ = code;
+    path_ = path;
+    isKeepAlive_ = isKeepAlive;
+    srcDir_ = srcDir;
+    mmFIle_ = nullptr;
+    mmFIleStat_ = { 0 };
+}
+
+
