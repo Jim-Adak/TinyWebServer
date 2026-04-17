@@ -37,7 +37,7 @@ private:
 
     static const std::unordered_map<std::string,std::string> SUFFIX_TYPE; //后缀类型集
     static const std::unordered_map<int,std::string>CODE_STATUS; //编码状态集
-    static const std::unordered_map<std::string,std::string>CODE_PATH; //编码路径集
+    static const std::unordered_map<int,std::string>CODE_PATH; //编码路径集
 
 };
 
