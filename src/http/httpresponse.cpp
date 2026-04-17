@@ -80,3 +80,14 @@ void HttpResponse::MakeResponse(Buffer &buff) {
     AddContent_(buff);
     AddContent_(buff);
 }
+
+char *HttpResponse::File() {
+    return mmFile_;
+}
+
+size_t HttpResponse::FIleLen() const {
+    return mmFIleStat_.st_size;
+}
+
+
+
