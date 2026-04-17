@@ -89,5 +89,11 @@ size_t HttpResponse::FIleLen() const {
     return mmFIleStat_.st_size;
 }
 
+void HttpResponse::ErrorHtml_() {
+    if (CODE_PATH.count(code_) == 1) {
+        path_ = CODE_PATH.find(code_)->second;
+        stat((srcDir_ + path_).data(),&mmFIleStat_);
+    }
+}
 
 
