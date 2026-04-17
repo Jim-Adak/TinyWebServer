@@ -9,7 +9,7 @@
 #include<string>
 #include<regex>
 #include<errno.h>
-#include<mysql.h>
+#include<mysql/mysql.h>
 #include"../buffer/buffer.h"
 #include"../Log/Log.h"
 #include"../Pool/sqlconnpool.h"
