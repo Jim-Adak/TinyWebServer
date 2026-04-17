@@ -48,3 +48,7 @@ HttpResponse::HttpResponse() {
     mmFIle_ = nullptr;
     mmFIleStat_ = {0};
 }
+
+HttpResponse::~HttpResponse() {
+    UnmapFile();
+}
