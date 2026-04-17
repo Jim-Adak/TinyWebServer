@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 4.0)
 project(TinyWebServer)
 
-include_directories("C:\\Program Files\\MySQL\\MySQL Server 8.0\\include")
+#include_directories("C:\\Program Files\\MySQL\\MySQL Server 8.0\\include")
 
-link_directories("C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib")
+#link_directories("C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib")
+
+include_directories(${MYSQL_INCLUDE_DIR})
 
 link_libraries(libmysql)
 
@@ -23,4 +25,7 @@ add_executable(TinyWebServer main.cpp
         src/http/httpresponse.h
 )
 
-target_link_libraries(TinyWebServer libmysql  ws2_32) #ws2_32是Windows socket库，mysql库需要，在Linux下将ws2_32注释掉
+#target_link_libraries(TinyWebServer libmysql  ws2_32) #ws2_32是Windows socket库，mysql库需要，在Linux下将ws2_32注释掉
+target_link_libraries(TinyWebServer
+        ${MYSQL_LIBRARIES}
+)
