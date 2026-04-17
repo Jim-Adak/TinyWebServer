@@ -96,4 +96,16 @@ void HttpResponse::ErrorHtml_() {
     }
 }
 
+void HttpResponse::AddStateLine_(Buffer &buff) {
+    string status;
+    if (CODE_STATUS(code_) == 1) {
+        status = CODE_STATUS.find(code_)->second;
+    }else {
+        code_ = 400;
+        status = CODE_STATUS.find(400)->second;
+    }
+    buff.Append("HTTP/1.1" + tp_string(code_)+ " " + status + "\r\n");
+}
+
+
 
