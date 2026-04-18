@@ -107,5 +107,16 @@ void HttpResponse::AddStateLine_(Buffer &buff) {
     buff.Append("HTTP/1.1" + tp_string(code_)+ " " + status + "\r\n");
 }
 
+void HttpResponse::AddHeader_(Buffer& buff) {
+    buff.Append("Connection: ");
+    if (isKeepAlive_) {
+        buff.Append("keep-alive\r\n");
+        buff.Append("keep-alive: max = 6, timeout = 120\r\n");
+    }else {
+        buff.Append("close\r\n");
+    }
+    buff.Append("Content-type:" + GetFileType_() + "\r\n");
+}
+
 
 
