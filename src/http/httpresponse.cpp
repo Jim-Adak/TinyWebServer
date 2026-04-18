@@ -157,5 +157,18 @@ string HttpResponse::GetFileType_() {
     return "text/plain";
 }
 
+void HttpResponse::ErrorContent(Buffer &buff, std::string message) {
+    string body;
+    string status;
+    body += "<html><title>Error</title>";
+    body += "<body bgcolor =\"fffff\">";
+    if (CODE_STATUS.count(code_) == 1 ) {
+        status = CODE_STATUS.find(code_)->second;
+    }else {
+        status = "Bad Request";
+    }
+}
+
+
 
 
