@@ -118,5 +118,25 @@ void HttpResponse::AddHeader_(Buffer& buff) {
     buff.Append("Content-type:" + GetFileType_() + "\r\n");
 }
 
+void HttpResponse::AddContent_(Buffer& buff) {
+    int srcFd = open((srcDir_ + path_).data(),O_RDONLY);
+    if (srcFd < 0) {
+        ErrorContent(buff,"file NotFound!");
+        return;
+    }
+
+    //将文件映射到内存提高文件的访问速度 MAP_PRIVATE建立一个写入时拷贝的私有映射
+    LOG_DEBUG("file path %s",(srcDir_ + path_).data());
+    int* mmRet = (int*)nmap(0,mmFIleStat_.st_size,PROT_READ,MAP_PRIVATE,srcFd,0);
+    if (*mmRet == -1) {
+        ErrorContent(buff,"File NotFound!");
+        return;
+    }
+    mmFile_ = (char*)mmRet;
+    close(srcFd);
+    buff.Append("Content-length:" + to_string(mmFIleStat_.st_size)+ "\r\n\r\n");
+}
+
+
 
 
