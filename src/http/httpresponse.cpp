@@ -137,6 +137,25 @@ void HttpResponse::AddContent_(Buffer& buff) {
     buff.Append("Content-length:" + to_string(mmFIleStat_.st_size)+ "\r\n\r\n");
 }
 
+void HttpResponse::UnmaoFile() {
+    if (mmFIle_) {
+        munmap(mmFIle_,mmFIleStat_.st_size);
+        mmFile_ = nullptr;
+    }
+}
+
+//判断文件类型
+string HttpResponse::GetFileType_() {
+    string::size_type idx = path_.find_last_of('.');
+    if (idx == string::npos) { //最大值 find函数在找不到指定值得情况下会返回string::npos
+        return "text/plain";
+    }
+    string suffix = path_.substr(idx);
+    if (SUFFIX_TYPE.count(suffix) == 1) {
+        return SUFFIX_TYPE.find(suffix)->second;
+    }
+    return "text/plain";
+}
 
 
 
