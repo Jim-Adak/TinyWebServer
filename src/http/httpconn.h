@@ -19,7 +19,20 @@
 //进行读写数据并调用httpreequest 来解析数据以及httpresponse来生成响应
 
 class HttpConn {
+private:
+    int fd_;
+    struct sockaddr_in addr_;
 
+    bool isClose();
+
+    int iovCnt_;
+    struct iovec iov_[2];
+
+    Buffer readBuff_; //读缓冲区
+    Buffer writeBuff_;//写缓冲区
+
+    HttpRequest request_;
+    HttpResponse response_;
 };
 
 
