@@ -19,6 +19,12 @@
 //进行读写数据并调用httpreequest 来解析数据以及httpresponse来生成响应
 
 class HttpConn {
+public:
+    HttpConn();
+    ~HttpConn();
+    void init(int sockFd,const sockaddr_in& addr);
+    ssize_t read(int* saveErrno);
+    ssize_t write(int* saveErrno);
 private:
     int fd_;
     struct sockaddr_in addr_;
