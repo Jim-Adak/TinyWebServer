@@ -52,6 +52,21 @@ const char *HttpConn::GetIP() const {
     return inet_ntoa(addr_.sin_addr);
 }
 
+int HttpConn::GetPort() const {
+    return addr_.sin_port;
+}
+
+ssize_t HttpConn::read(int *saveErrno) {
+    ssize_t len = -1;
+    do {
+        len = readBuff_.ReadFd(fd_,saveErrno);
+        if (len <= 0) {
+            break;
+        }
+    }while (isET);
+    return len;
+}
+
 
 
 
