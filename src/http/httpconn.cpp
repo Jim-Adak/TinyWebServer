@@ -48,6 +48,13 @@ struct sockaddr_in HttpConn::GetAddr() const {
     return addr_;
 }
 
+const char *HttpConn::GetIP() const {
+    return inet_ntoa(addr_.sin_addr);
+}
+
+
+
+
 
 
 
