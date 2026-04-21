@@ -83,6 +83,19 @@ ssize_t HttpConn::write(int *saveErrno) {
     return len;
 }
 
+bool HttpConn::process() {
+    request_.Init();
+    if (readBuff_.ReadableBytes() <= 0) {
+        return false;
+    }else if (request_.parse(readBuff_)) {
+        LOG_DEBUG("%s",request_.path().c_str());
+        response_.Init(srcDir,request_.path(),request_.IsKeepAlive(),200);
+    }else {
+        response_.Init(srcDir,request_.path(),false,400);
+    }
+}
+
+
 
 
 

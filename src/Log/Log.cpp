@@ -1,7 +1,6 @@
 //
 // Created by Confuse on 2026/3/9.
 //
-
 #include "Log.h"
 
 //构造函数
@@ -188,6 +187,5 @@ void Log::SetLevel(int level) {
     std::lock_guard<std::mutex> locker(mtx_);
     level_ = level;
 }
-
 
 
