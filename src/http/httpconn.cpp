@@ -29,3 +29,15 @@ void HttpConn::init(int fd,const sockaddr_in& addr) {
     isClose() = false;
     LOG_INFO("Client[&d](&s:&d) in, userCount:%d",fd_,GetIP(),GetPort(),(int)userCount);
 }
+
+void HttpConn::Close() {
+    response_.UnmapFile();
+    if (isClose_ == false) {
+        isClose_ = true;
+        userCount--;
+        close(fd_);
+        LOG_INFO("Client[&d](&s:&d) in, userCount:%d",fd_,GetIP(),GetPort(),(int)userCount);
+    }
+}
+
+
