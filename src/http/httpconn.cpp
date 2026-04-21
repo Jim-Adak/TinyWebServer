@@ -40,4 +40,9 @@ void HttpConn::Close() {
     }
 }
 
+int HttpConn::GetFd() const {
+    return fd_;
+}
+
+
 
