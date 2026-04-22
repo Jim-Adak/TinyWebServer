@@ -19,4 +19,16 @@ typedef std::chrono::high_resolution_clock Clock;
 typedef std::chrono::milliseconds MS;
 typedef Clock::time_point TimeStamp;
 
+struct TimerNode {
+    int id;
+    TimeStamp expires; //超时时间点
+    TimeoutCallBack cb; //回调function<void()>
+    bool operator< (const TimerNode &t) { //重载大于运算符
+        return expires < t.expires;
+    }
+    bool operator > (const TimerNode &t) { //重载小于运算符
+        return expires > t.expires;
+    }
+};
+
 #endif //TINYWEBSERVER_HEAPTIMER_H
