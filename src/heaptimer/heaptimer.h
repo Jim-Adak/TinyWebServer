@@ -14,4 +14,9 @@
 #include<chrono>
 #include"../log/log.h"
 
+typedef std::function<void()> TimeoutCallBack;
+typedef std::chrono::high_resolution_clock Clock;
+typedef std::chrono::milliseconds MS;
+typedef Clock::time_point TimeStamp;
+
 #endif //TINYWEBSERVER_HEAPTIMER_H
