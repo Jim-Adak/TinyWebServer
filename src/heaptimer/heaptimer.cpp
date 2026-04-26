@@ -62,6 +62,25 @@ void HeapTimer::adjust(int id, int newExpires) {
     heap_[ref_[id]].expires = Clock::now() + MS(newExpires);
 }
 
+void HeapTimer::add(int id, int timeOut, const TimeoutCallBack &cb) {
+    assert(id>= 0);
+    //如果有，则调整
+    if (ref_.count(id)) {
+        int tmp = ref_[id];
+        heap_[tmp].expires = Clock::now() + MS(timeOut);
+        heap_[tmp].cb = cb;
+        if (!siftdown_(tmp,heap_.size())) {
+            siftup_(tmp);
+        }
+    }else {
+        size_t n = heap_.size();
+        ref_[id] = n;
+        heap_.push_back({id,Clock::now() + MS(timeOut),cb});
+        siftup_(n);
+    }
+}
+
+
 
 
 
