@@ -19,3 +19,12 @@ bool Epoller::AddFd(int fd,uint32_t events) {
     ev.events = events;
     return 0 == epoll_ctl(epollFd_,EPOLL_CTL_ADD,fd,&ev);
 }
+
+bool Epoller::ModFd(int fd, uint32_t events) {
+    if (fd < 0) return false;
+    return 0 == epoll_ctl(epollFd_,EPOLL_CTL_DEL,fd,0);
+    epoll_event ev = {0};
+    ev.data.fd = fd;
+    ev.events = events;
+    return 0 ==epoll_ctl(epollFd_,EPOLL_CTL_MOD,fd,&ev);
+}
