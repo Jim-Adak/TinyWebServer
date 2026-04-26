@@ -25,3 +25,21 @@ void HeapTimer::siftup_(size_t i) {
         }
     }
 }
+
+//false:不需要下滑 true：下滑成功
+bool HeapTimer::siftdown_(size_t i, size_t n) {
+    assert(i >= 0 && i< heap_.size());
+    assert(n >= 0 && n<=heap_.size());
+    auto index = i;
+    auto child = 2*index+1;
+    while (child < n) {
+        if (child + 1 < n && heap_[child+1] < heap_[child]) {
+            child++;
+        }
+    }
+}
+
+
+
+
+
