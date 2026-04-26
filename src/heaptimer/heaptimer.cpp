@@ -80,6 +80,18 @@ void HeapTimer::add(int id, int timeOut, const TimeoutCallBack &cb) {
     }
 }
 
+//删除指定ip，并触发回调函数
+void HeapTimer::doWork(int id) {
+    if (heap_.empty() || ref_.count(id) == 0) {
+        return;
+    }
+    size_t i = ref_[id];
+    auto node = heap_[i];
+    node.cb(); //触发回调函数
+    del_(i);
+}
+
+
 
 
 
