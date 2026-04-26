@@ -39,6 +39,24 @@ bool HeapTimer::siftdown_(size_t i, size_t n) {
     }
 }
 
+//删除指定位置的节点
+void HeapTimer::del_(size_t index) {
+    assert(index >= 0 && index < heap_.size());
+    size_t tmp = index;
+    size_t n = heap_.size() - 1;
+    assert(tmp <= n);
+    //如果就在队尾，就不用移动
+    if (index < heap_.size() - 1) {
+        SwapNode_(tmp,heap_.size() - 1);
+        if (!siftdown_(tmp,n)) {
+            siftup_(tmp);
+        }
+    }
+    ref_.erase(heap_.back().id);
+    heap_.pop_back();
+}
+
+
 
 
 
