@@ -27,6 +27,7 @@ add_executable(TinyWebServer main.cpp
         src/heaptimer/heaptimer.cpp
         src/http/httpconn.cpp
         src/epoll/epoller.h
+        src/epoll/epoller.cpp
 )
 
 #target_link_libraries(TinyWebServer libmysql  ws2_32) #ws2_32是Windows socket库，mysql库需要，在Linux下将ws2_32注释掉
