@@ -91,6 +91,20 @@ void HeapTimer::doWork(int id) {
     del_(i);
 }
 
+void HeapTimer::tick() {
+    //清除超时结点
+    if (heap_.empty()) {
+        return;
+    }
+    while (!heap_.empty()) {
+        TimerNode node = heap_.front();
+        if (std::chrono::duration_cast<MS>(node.expires - Clock::now()).count()> 0) {
+            break;
+        }
+        node.cb();
+        pop();
+    }
+}
 
 
 
