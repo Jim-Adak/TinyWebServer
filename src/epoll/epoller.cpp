@@ -12,4 +12,10 @@ Epoller::~Epoller() {
     close(epollFd_);
 }
 
-
+bool Epoller::AddFd(int fd,uint32_t events) {
+    if (fd < 0) return false;
+    epoll_event ev = {0};
+    ev.data.fd = fd;
+    ev.events = events;
+    return 0 == epoll_ctl(epollFd_,EPOLL_CTL_ADD,fd,&ev);
+}
