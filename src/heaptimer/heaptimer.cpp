@@ -116,7 +116,15 @@ void HeapTimer::clear() {
     heap_.clear();
 }
 
-
+int HeapTimer::GetNextTick() {
+    tick();
+    size_t res = -1;
+    if (!heap_.empty()) {
+        res = std::chrono::duration_cast<MS>(heap_.front().expires - Clock::now()).count();
+        if (res < 0){ res = 0; }
+    }
+    return res;
+}
 
 
 
