@@ -38,4 +38,10 @@ int Epoller::Wait(int timeoutMs) {
     return epoll_wait(epollFd_,&events_[0],static_cast<int>(events_.size()),timeoutMs);
 }
 
+//获取事件的id
+int Epoller::GetEventFd(size_t i) const {
+    assert(i < events_.size() && i >= 0);
+    return events_[i].data.fd;
+}
+
 
