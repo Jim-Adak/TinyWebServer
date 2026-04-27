@@ -23,6 +23,26 @@
 
 class WebServer {
 private:
+    bool InitSocket_();
+    void InitEventMode_(int trigMode);
+    void AddClient_(int fd,sockaddr_in addr);
+
+    void DealListen_();
+    void DealWrite_(HttpConn* client);
+    void DealRead_(HttpConn* client);
+
+    void SendError_(int fd,const char* info);
+    void ExtentTime_(HttpConn* client);
+    void CloseConn_(HttpConn* client);
+
+    void OnRead_(HttpConn* client);
+    void OnWrite_(HttpConn* client);
+    void OnProcess(HttpConn* client);
+
+    static const int MAX_FD = 65536;
+
+    static int SetFdNonblock(int fd);
+
     int port_;
     bool openLinger_;
     int timeoutMS_; //毫秒MS
