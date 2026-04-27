@@ -44,4 +44,12 @@ int Epoller::GetEventFd(size_t i) const {
     return events_[i].data.fd;
 }
 
+//获取事件的属性
+uint32_t Epoller::GetEvents(size_t i) const {
+    assert(i < events_.size() && i >= 0);
+    return events_[i].events;
+}
+
+
+
 
