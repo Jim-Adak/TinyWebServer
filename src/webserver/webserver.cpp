@@ -25,15 +25,20 @@ WebServer::WebServer( int port, int trigMode, int timeoutMS, bool OptLinger,
     InitEventMode_(trigMode);
     if (!InitSocket_()) { isClose_ = true; }
 
-    //是否打开日志的标志
-    if (openLog) {
-        Log::Instance()->init(logLevel,"./log",".log",logQueSize);
-        if (isClose_) { LOG_ERROR("========== Server init error!===========");}
+    // 是否打开日志标志
+    if(openLog) {
+        Log::Instance()->init(logLevel, "./log", ".log", logQueSize);
+        if(isClose_) { LOG_ERROR("========== Server init error!=========="); }
         else {
-            LOG_INFO("============ Server init ===============");
-            LOG_INFO("Port:&d,OpenLinger:%",port_,OptLinger ? "true":"false");
+            LOG_INFO("========== Server init ==========");
+            LOG_INFO("Port:%d, OpenLinger: %s", port_, OptLinger? "true":"false");
+            LOG_INFO("Listen Mode: %s, OpenConn Mode: %s",
+                            (listenEvent_ & EPOLLET ? "ET": "LT"),
+                            (connEvent_ & EPOLLET ? "ET": "LT"));
+            LOG_INFO("LogSys level: %d", logLevel);
+            LOG_INFO("srcDir: %s", HttpConn::srcDir);
+            LOG_INFO("SqlConnPool num: %d, ThreadPool num: %d", connPoolNum, threadNum);
         }
     }
 }
-
 
