@@ -62,7 +62,7 @@ private:
     uint32_t connEvent_; //连接事件
 
     std::unique_ptr<HeapTimer> timer_;
-    std::unique_ptr<ThreadPool> thread_pool_;
+    std::unique_ptr<ThreadPool> threadpool_;
     std::unique_ptr<Epoller> epoller_;
     std::unordered_map<int,HttpConn> users_;
 };
