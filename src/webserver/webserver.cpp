@@ -72,3 +72,36 @@ void WebServer::InitEventMode_(int trigMode) {
     }
     HttpConn::isET = (connEvent_ & EPOLLET);
 }
+
+
+void WebServer::Start() {
+    int timeMS = -1; /* epoll wait timeout == -1 无事件将阻塞 */
+    if (!isClose_) { LOG_INFO("======== Server start =========");}
+    while (!isClose_) {
+        if (timeoutMS_ > 0) {
+            timeMS = timer_->GetNextTick(); // 获取下一次的超时等待事件(至少这个时间才会有用户过期，每次关闭超时连接则需要有新的请求进来)
+        }
+        int eventCnt = epoller_->Wait(timeMS);
+        for (int i = 0;i < eventCnt;i++) {
+            //处理事件
+            int fd = epoller_->GetEventFd(i);
+            uint32_t events = epoller_->GetEvents(i);
+            if (fd == listenFd_) {
+                DealListen_();
+            }else if (events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
+                assert(users_.count(fd) > 0);
+                CloseConn_(&users_[fd]);
+            }else if (events & EPOLLIN) {
+                assert(users_.count(fd) > 0);
+                DealRead_(&users_[fd]);
+            }else if (events & EPOLLOUT) {
+                assert(users_.count(fd) > 0);
+                DealWrite_(&users_[fd]);
+            }else {
+                LOG_ERROR("Unexpected event");
+            }
+        }
+    }
+}
+
+
