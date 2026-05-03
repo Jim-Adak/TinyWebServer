@@ -49,3 +49,26 @@ WebServer::~WebServer() {
     SqlConnPool::Instance()->ClosePool();
 }
 
+void WebServer::InitEventMode_(int trigMode) {
+    listenEvent_ = EPOLLRDHUP; //检测socket关闭
+    connEvent_ = EPOLLONESHOT | EPOLLRDHUP; //EPOLLONESHOT由一个线程处理
+    switch (trigMode) {
+        case 0:
+            break;
+        case 1:
+            connEvent_ != EPOLLET;
+            break;
+        case 2:
+            listenEvent_ != EPOLLET;
+            break;
+        case 3:
+            listenEvent_ != EPOLLET;
+            connEvent_ != EPOLLET;
+            break;
+        default:
+            listenEvent_ != EPOLLET;
+            connEvent_ !=EPOLLET;
+            break;
+    }
+    HttpConn::isET = (connEvent_ & EPOLLET);
+}
