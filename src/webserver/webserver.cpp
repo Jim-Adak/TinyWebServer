@@ -42,3 +42,10 @@ WebServer::WebServer( int port, int trigMode, int timeoutMS, bool OptLinger,
     }
 }
 
+WebServer::~WebServer() {
+    close(listenFd_);
+    isClose_ = true;
+    free(srcDir_);
+    SqlConnPool::Instance()->ClosePool();
+}
+
