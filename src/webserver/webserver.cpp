@@ -131,6 +131,23 @@ void WebServer::AddClient_(int fd, sockaddr_in addr) {
     LOG_INFO("Client[%d] in!:",users_[fd].GetFd());
 }
 
+//处理监听套接字，主要逻辑是accept新的套接字，并加入timer和epoller中
+void WebServer::DealListen_() {
+    struct sockaddr_in addr;
+    socklen_t len = sizeof(addr);
+    do {
+        int fd = accept(listenFd_,(struct sockaddr*)&addr,&len);
+        if (fd <= 0) { return; }
+        else if (HttpConn::userCount >= MAX_FD) {
+            SendError_(fd,"Server busy!");
+            LOG_WARN("Client is full!");
+            return;
+        }
+        AddClient_(fd,addr);
+    }while (listenEvent_ & EPOLLET);
+}
+
+
 
 
 
