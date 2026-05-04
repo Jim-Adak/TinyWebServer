@@ -1,16 +1,11 @@
-#include <iostream>
+#include<unistd.h>
+#include "src/webserver/webserver.h"
 
-// TIP 要<b>Run</b>代码，请按 <shortcut actionId="Run"/> 或点击装订区域中的 <icon src="AllIcons.Actions.Execute"/> 图标。
 int main() {
-    // TIP 当文本光标位于 <b>lang</b> 变量名称处时，按 <shortcut actionId="RenameElement"/> 可以查看 CLion 如何帮助您重命名该变量。
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
-
-    for (int i = 1; i <= 5; i++) {
-        // TIP 按 <shortcut actionId="Debug"/> 开始调试代码。我们已为您设置了一个 <icon src="AllIcons.Debugger.Db_set_breakpoint"/> 断点，但您可以随时按 <shortcut actionId="ToggleLineBreakpoint"/> 添加更多断点。
-        std::cout << "i = " << i << std::endl;
-    }
-
-    return 0;
-    // TIP 请访问 <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a> 查看 CLion 帮助。此外，您还可以从主菜单中选择“帮助 | 学习 IDE 功能”，尝试 CLion 的交互式课次。
+    //守护进程。后台运行
+    WebServer server(
+        1316,3,60000,false,                     /* 端口 ET模式 timeoutMs 优雅退出  */
+        3306,"root","123456","webserver",       /* Mysql配置 */
+        12,6,true,1,1024);                      /* 连接池数量 线程池数量 日志开关 日志等级 日志异步队列容量 */
+    server.Start();
 }
