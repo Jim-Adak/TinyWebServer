@@ -154,6 +154,14 @@ void WebServer::DealRead_(HttpConn *client) {
     threadpool_->AddTask(std::bind(&WebServer::OnRead_,this,client)); //这是一个右值，bind将参数和函数绑定
 }
 
+//处理写事件，主要逻辑是将OnWrite加入线程池的任务队列中
+void WebServer::DealWrite_(HttpConn *client) {
+    assert(client);
+    ExtentTime_(client);
+    threadpool_->AddTask(std::bind(&WebServer::OnWrite_,this,client));
+}
+
+
 
 
 
