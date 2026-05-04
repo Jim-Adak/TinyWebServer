@@ -113,5 +113,13 @@ void WebServer::SendError_(int fd, const char *info) {
     close(fd);
 }
 
+void WebServer::CloseConn_(HttpConn *client) {
+    assert(client);
+    LOG_INFO("Client[%d] quit!",client->GetFd());
+    epoller_->DelFd(client->GetFd());
+    client->Close();
+}
+
+
 
 
