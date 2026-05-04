@@ -193,6 +193,28 @@ void WebServer::OnProcess(HttpConn *client) {
     }
 }
 
+void WebServer::OnWrite_(HttpConn *client) {
+    assert(client);
+    int ret = -1;
+    int writeErrno = 0;
+    ret = client->write(&writeErrno);
+    if (client->ToWriteBytes() == 0) {
+        //传输完成
+        if (client->IsKeepAlive()) {
+            //OnProcess(client)
+            epoller_->ModFd(client->GetFd(),connEvent_ | EPOLLIN); //回归换成监测读事件
+            return;
+        }
+    }
+    else if (ret < 0) {
+        if (writeErrno == EAGAIN) { //缓冲区满了
+            //继续传输
+            epoller_->ModFd(client->GetFd(),connEvent_ | EPOLLOUT);
+            return;
+        }
+    }
+    CloseConn_(client);
+}
 
 
 
