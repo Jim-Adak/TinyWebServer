@@ -161,6 +161,13 @@ void WebServer::DealWrite_(HttpConn *client) {
     threadpool_->AddTask(std::bind(&WebServer::OnWrite_,this,client));
 }
 
+void WebServer::ExtentTime_(HttpConn *client) {
+    assert(client);
+    if (timeoutMS_ > 0) {
+        timer_->adjust(client->GetFd(),timeoutMS_);
+    }
+}
+
 
 
 
