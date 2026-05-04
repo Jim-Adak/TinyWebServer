@@ -147,6 +147,16 @@ void WebServer::DealListen_() {
     }while (listenEvent_ & EPOLLET);
 }
 
+//处理读事件，主要逻辑是将OnRead加入线程池的任务队列中
+void WebServer::DealRead_(HttpConn *client) {
+    assert(client);
+    ExtentTime_(client);
+    threadpool_->AddTask(std::bind(&WebServer::OnRead_,this,client)); //这是一个右值，bind将参数和函数绑定
+}
+
+
+
+
 
 
 
