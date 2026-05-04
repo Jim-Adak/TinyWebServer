@@ -168,7 +168,7 @@ void WebServer::ExtentTime_(HttpConn *client) {
     }
 }
 
-void WebServer::OnRead_(HttpConn *client) {
+void WebServer::OnRead_(HttpConn* client) {
     assert(client);
     int ret = -1;
     int readErrno = 0;
@@ -180,6 +180,19 @@ void WebServer::OnRead_(HttpConn *client) {
     //业务逻辑的处理(先读后处理)
     OnProcess(client);
 }
+
+//处理读请求数据的函数
+void WebServer::OnProcess(HttpConn *client) {
+    //首先调用process()进行逻辑处理
+    if (client->process()) {  //根据返回的信息重新将fd置为EPOLLOUT(写)或EPOLLIN(读)
+        //读完事件就跟内核说可以写了
+        epoller_->ModFd(client->GetFd(),connEvent_ | EPOLLOUT); //响应成功，修改监听事件为写，等待OnWrite_()发送
+    }else {
+        //写完事件就跟内核说可以读了
+        epoller_->ModFd(client->GetFd(),connEvent_ | EPOLLIN);
+    }
+}
+
 
 
 
