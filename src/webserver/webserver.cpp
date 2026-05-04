@@ -168,6 +168,18 @@ void WebServer::ExtentTime_(HttpConn *client) {
     }
 }
 
+void WebServer::OnRead_(HttpConn *client) {
+    assert(client);
+    int ret = -1;
+    int readErrno = 0;
+    ret = client->read(&readErrno); //读取客户端套接字的数据，读到httpconn的读缓存区
+    if (ret <= 0 && readErrno != EAGAIN) { //读异常就关闭客户端
+        CloseConn_(client);
+        return;
+    }
+    //业务逻辑的处理(先读后处理)
+    OnProcess(client);
+}
 
 
 
