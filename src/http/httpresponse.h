@@ -41,7 +41,7 @@ private:
     std::string path_;
     std::string srcDir_;
 
-    char* mmFIle_;
+    char* mmFile_;
     struct stat mmFIleStat_;
 
     static const std::unordered_map<std::string,std::string> SUFFIX_TYPE; //后缀类型集
