@@ -26,7 +26,7 @@ void HttpConn::init(int fd,const sockaddr_in& addr) {
     fd_ = fd;
     writeBuff_.RetrieveAll();
     readBuff_.RetrieveAll();
-    isClose() = false;
+    isClose_ = false;
     LOG_INFO("Client[&d](&s:&d) in, userCount:%d",fd_,GetIP(),GetPort(),(int)userCount);
 }
 
