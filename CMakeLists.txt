@@ -21,7 +21,7 @@ add_executable(TinyWebServer main.cpp
         src/Pool/ThreadPool.h
         src/Pool/sqlconnpool.h
         src/Pool/sqlconnpool.cpp
-        src/Pool/test.cpp
+        #src/Pool/test.cpp
         src/http/httprequest.h
         src/http/httprequest.cpp
         src/http/httpresponse.h
