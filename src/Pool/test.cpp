@@ -43,8 +43,9 @@ void ThreadLogTask(int i,int cnt) {
     }
     getchar();
 }
-
+/*
 int main() {
     TestLog();
     //TestThreadPool();
 }
+*/
