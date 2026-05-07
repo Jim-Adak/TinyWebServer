@@ -5,7 +5,7 @@
 #ifndef TINYWEBSERVER_SQLCONNPOOL_H
 #define TINYWEBSERVER_SQLCONNPOOL_H
 
-#include<mysql.h>
+#include<mysql/mysql.h>
 #include<string>
 #include<queue>
 #include<mutex>
