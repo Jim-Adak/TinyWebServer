@@ -48,7 +48,7 @@ private:
     int fd_;
     struct sockaddr_in addr_;
 
-    bool isClose();
+    bool isClose_;
 
     int iovCnt_;
     struct iovec iov_[2];
