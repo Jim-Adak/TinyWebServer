@@ -9,6 +9,13 @@ const char* HttpConn::srcDir;
 std::atomic<int> HttpConn::userCount;
 bool HttpConn::isET;
 
+void HttpRequest::Init() {
+    method_ = path_ = version_ = body_ = "";
+    state_ = REQUEST_LINE;
+    header_.clear();
+    post_.clear();
+}
+
 HttpConn::HttpConn() {
     fd_ = -1;
     addr_ = { 0 };
