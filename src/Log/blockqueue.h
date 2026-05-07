@@ -18,7 +18,7 @@ public:
     bool full();
     void push_back(const T& item);
     void push_front(const T& item);
-    bool pop(T& item); //弹出的任务放item
+    bool pop(T& item,int timeout); //弹出的任务放item
     bool opo(T& item,int timeout); //等待时间
     void clear();
     T front();
@@ -97,7 +97,7 @@ void BlockQueue<T>::push_front(const T &item) {
 }
 
 template<typename T>
-bool BlockQueue<T>::pop(T &item) {
+bool BlockQueue<T>::pop(T &item,int timeout) {
     std::unique_lock<std::mutex> locker(mtx_);
     while (deq_.empty()) {
         condConsumer_.wait(locker);  //队列空了，需要等待
