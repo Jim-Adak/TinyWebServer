@@ -137,9 +137,9 @@ void HttpResponse::AddContent_(Buffer& buff) {
     buff.Append("Content-length:" + to_string(mmFIleStat_.st_size)+ "\r\n\r\n");
 }
 
-void HttpResponse::UnmaoFile() {
-    if (mmFIle_) {
-        munmap(mmFIle_,mmFIleStat_.st_size);
+void HttpResponse::UnmapFile() {
+    if (mmFile_) {
+        munmap(mmFile_,mmFIleStat_.st_size);
         mmFile_ = nullptr;
     }
 }
