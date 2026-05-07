@@ -19,7 +19,7 @@ public:
     HttpResponse();
     ~HttpResponse();
 
-    void Init(const std::string& srcDir,std::string& path,bool isKeepAlive = false,int code = -1);
+    void Init(const std::string& srcDir,const std::string& path,bool isKeepAlive = false,int code = -1);
     void MakeResponse(Buffer& buff);
     void UnmapFile();
     char* File();

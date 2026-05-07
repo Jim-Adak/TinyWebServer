@@ -53,7 +53,7 @@ HttpResponse::~HttpResponse() {
     UnmapFile();
 }
 
-void HttpResponse::Init(const string& srcDir,string& path,bool isKeepAlive,int code) {
+void HttpResponse::Init(const std::string& srcDir,string& path,bool isKeepAlive,int code) {
     assert(srcDir != "");
     if (mmFile_) { UnmapFile(); }
     code_ = code;
