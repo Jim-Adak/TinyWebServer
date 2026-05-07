@@ -77,7 +77,7 @@ ssize_t HttpConn::write(int *saveErrno) {
         }
         if (iov_[0].iov_len + iov_[1].iov_len == 0){ break; } //传输结束
         else if (static_cast<size_t>(len) > iov_[0].iov_len) {
-            iov_[1].iov_base = (uint8_t) iov_[1].iov_base + (len - iov_[0].iov_len)
+            iov_[1].iov_base =(char*)iov_[1].iov_base +(len - iov_[0].iov_len);
         }
     }while (isET || ToWriteBytes() > 10240);
     return len;
