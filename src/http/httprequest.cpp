@@ -23,7 +23,7 @@ bool HttpRequest::IsKeepAlive() const {
 
 //解析处理
 bool HttpRequest::parse(Buffer &buff) {
-    const char* CRLF[] = "\r\n"; //行结束符标志（回车换行）
+    const char* CRLF = "\r\n"; //行结束符标志（回车换行）
     if (buff.ReadableBytes() <=0) { //没有可读的字符
         return false;
     }
