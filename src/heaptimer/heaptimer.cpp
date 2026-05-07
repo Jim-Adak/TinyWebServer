@@ -37,6 +37,7 @@ bool HeapTimer::siftdown_(size_t i, size_t n) {
             child++;
         }
     }
+    return index > i;
 }
 
 //删除指定位置的节点
