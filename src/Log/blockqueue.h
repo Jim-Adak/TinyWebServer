@@ -19,7 +19,7 @@ public:
     void push_back(const T& item);
     void push_front(const T& item);
     bool pop(T& item); //弹出的任务放item
-    bool opo(T& item,int timeout); //等待时间
+    bool pop(T& item,int timeout); //等待时间
     void clear();
     T front();
     T back();
