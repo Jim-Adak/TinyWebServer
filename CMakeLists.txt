@@ -5,6 +5,8 @@ project(TinyWebServer)
 
 #link_directories("C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib")
 
+find_package(MySQL REQUIRED)
+
 include_directories(${MYSQL_INCLUDE_DIR})
 
 link_libraries(libmysql)
@@ -31,6 +33,8 @@ add_executable(TinyWebServer main.cpp
         src/webserver/webserver.h
         src/webserver/webserver.cpp
 )
+
+
 
 #target_link_libraries(TinyWebServer libmysql  ws2_32) #ws2_32是Windows socket库，mysql库需要，在Linux下将ws2_32注释掉
 target_link_libraries(TinyWebServer
