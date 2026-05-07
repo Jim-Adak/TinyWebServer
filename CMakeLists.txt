@@ -5,7 +5,7 @@ project(TinyWebServer)
 
 #link_directories("C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib")
 
-find_package(MySQL REQUIRED)
+#find_package(MySQL REQUIRED)
 
 include_directories(${MYSQL_INCLUDE_DIR})
 
