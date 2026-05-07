@@ -25,6 +25,7 @@ add_executable(TinyWebServer main.cpp
         src/http/httprequest.h
         src/http/httprequest.cpp
         src/http/httpresponse.h
+        src/http/httpresponse.cpp
         src/heaptimer/heaptimer.h
         src/heaptimer/heaptimer.cpp
         src/http/httpconn.cpp
