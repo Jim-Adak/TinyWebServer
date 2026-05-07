@@ -45,7 +45,7 @@ HttpResponse::HttpResponse() {
     code_ = -1;
     path_ = srcDir_ = "";
     isKeepAlive_ = false;
-    mmFIle_ = nullptr;
+    mmFile_ = nullptr;
     mmFIleStat_ = {0};
 }
 
@@ -60,7 +60,7 @@ void HttpResponse::Init(const std::string& srcDir,const std::string& path,bool i
     path_ = path;
     isKeepAlive_ = isKeepAlive;
     srcDir_ = srcDir;
-    mmFIle_ = nullptr;
+    mmFile_ = nullptr;
     mmFIleStat_ = { 0 };
 }
 
