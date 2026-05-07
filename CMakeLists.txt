@@ -9,7 +9,7 @@ project(TinyWebServer)
 
 include_directories(${MYSQL_INCLUDE_DIR})
 
-link_libraries(libmysql)
+
 
 set(CMAKE_CXX_STANDARD 20)
 
