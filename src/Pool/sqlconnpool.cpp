@@ -52,6 +52,18 @@ void SqlConnPool::FreeConn(MYSQL* conn) {
     sem_post(&semId_); //+1
 }
 
+//关闭sql数据池
+void SqlConnPool::ClosePool() {
+    std::lock_guard<std::mutex> locker(mtx_);
+    while (connQue_.empty()) {
+        auto conn = connQue_.front();
+        connQue_.pop();
+        mysql_close(conn);
+    }
+    mysql_library_end();
+}
+
+
 int SqlConnPool::GetFreeConnCount() {
     std::lock_guard<std::mutex> locker(mtx_);
     return connQue_.size();
