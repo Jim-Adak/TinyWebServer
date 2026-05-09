@@ -90,7 +90,7 @@ void Log::init(int level, const char *path, const char *suffix, int maxQueueCapa
         }
         fp_ = fopen(fileName,"a"); //打开文件读取并附加写入
         if (fp_ == nullptr) {
-            std::filesystem::create_directory(fileName);
+            std::filesystem::create_directory(path_);
             fp_ = fopen(fileName,"a"); //生成目录文件
         }
         assert(fp_ != nullptr);
