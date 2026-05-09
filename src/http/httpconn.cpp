@@ -107,12 +107,12 @@ bool HttpConn::process() {
     iovCnt_ = 1;
 
     //文件
-    if (response_.FIleLen() > 0 && response_.File()) {
+    if (response_.FileLen() > 0 && response_.File()) {
         iov_[1].iov_base = response_.File();
-        iov_[1].iov_len = response_.FIleLen();
+        iov_[1].iov_len = response_.FileLen();
         iovCnt_ = 2;
     }
-    LOG_DEBUG("filesize:%d,%d to %d",response_.FIleLen(),iovCnt_,ToWriteBytes());
+    LOG_DEBUG("filesize:%d,%d to %d",response_.FileLen(),iovCnt_,ToWriteBytes());
     return true;
 }
 
