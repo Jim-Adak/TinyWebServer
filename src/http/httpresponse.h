@@ -19,13 +19,13 @@ public:
     HttpResponse();
     ~HttpResponse();
 
-    void Init(const std::string& srcDir,const std::string& path,bool isKeepAlive = false,int code = -1);
+    void Init(const std::string& srcDir, std::string& path, bool isKeepAlive = false, int code = -1);
     void MakeResponse(Buffer& buff);
     void UnmapFile();
     char* File();
-    size_t FIleLen() const;
-    void ErrorContent(Buffer& buff,std::string message);
-    int Code() const {return code_;}
+    size_t FileLen() const;
+    void ErrorContent(Buffer& buff, std::string message);
+    int Code() const { return code_; }
 
 private:
     void AddStateLine_(Buffer &buff);
@@ -33,7 +33,7 @@ private:
     void AddContent_(Buffer &buff);
 
     void ErrorHtml_();
-    std::string GetFIleType_();
+    std::string GetFileType_();
 
     int code_;
     bool isKeepAlive_;
@@ -44,10 +44,12 @@ private:
     char* mmFile_;
     struct stat mmFileStat_;
 
-    static const std::unordered_map<std::string,std::string> SUFFIX_TYPE; //后缀类型集
-    static const std::unordered_map<int,std::string>CODE_STATUS; //编码状态集
-    static const std::unordered_map<int,std::string>CODE_PATH; //编码路径集
-
+    static const std::unordered_map<std::string, std::string> SUFFIX_TYPE;  // 后缀类型集
+    static const std::unordered_map<int, std::string> CODE_STATUS;          // 编码状态集
+    static const std::unordered_map<int, std::string> CODE_PATH;            // 编码路径集
 };
+
+
+
 
 #endif //TINYWEBSERVER_HTTPRESPONSE_H
