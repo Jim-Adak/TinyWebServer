@@ -24,6 +24,8 @@ void SqlConnPool::Init(const char* host,int port,
         conn = mysql_real_connect(conn,host,user,pwd,dbName,port,nullptr,0);
         if (!conn) {
             LOG_ERROR("MySql Connect error!");
+            mysql_close(conn);
+            continue;
         }
         connQue_.emplace(conn);
     }
