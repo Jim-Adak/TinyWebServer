@@ -55,7 +55,7 @@ void SqlConnPool::FreeConn(MYSQL* conn) {
 //关闭sql数据池
 void SqlConnPool::ClosePool() {
     std::lock_guard<std::mutex> locker(mtx_);
-    while (connQue_.empty()) {
+    while (!connQue_.empty()) {
         auto conn = connQue_.front();
         connQue_.pop();
         mysql_close(conn);
