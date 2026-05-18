@@ -56,18 +56,18 @@ void WebServer::InitEventMode_(int trigMode) {
         case 0:
             break;
         case 1:
-            connEvent_ != EPOLLET;
+            connEvent_ |= EPOLLET;
             break;
         case 2:
-            listenEvent_ != EPOLLET;
+            listenEvent_ |= EPOLLET;
             break;
         case 3:
-            listenEvent_ != EPOLLET;
-            connEvent_ != EPOLLET;
+            listenEvent_ |= EPOLLET;
+            connEvent_ |= EPOLLET;
             break;
         default:
-            listenEvent_ != EPOLLET;
-            connEvent_ !=EPOLLET;
+            listenEvent_ |= EPOLLET;
+            connEvent_ |=EPOLLET;
             break;
     }
     HttpConn::isET = (connEvent_ & EPOLLET);
