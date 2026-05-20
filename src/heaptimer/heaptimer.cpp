@@ -36,6 +36,12 @@ bool HeapTimer::siftdown_(size_t i, size_t n) {
         if (child + 1 < n && heap_[child+1] < heap_[child]) {
             child++;
         }
+        if (heap_[child] < heap_[index]) {
+            SwapNode_(index,child);
+            index = child;
+            child = 2 *child + 1;
+        }
+        break;  //跳出循环
     }
     return index > i;
 }
