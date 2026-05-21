@@ -182,7 +182,7 @@ bool HttpRequest::UserVerify(const std::string &name,const std::string &pwd,bool
     if (name == "" || pwd == "") {return false;}
     LOG_INFO("Verify name:%s pwd:%s",name.c_str(),pwd.c_str());
     MYSQL *sql;
-    SqlConnRAII(&sql,SqlConnPool::Instance());
+    SqlConnRAII raii(&sql,SqlConnPool::Instance());
     assert(sql);
 
     bool flag = false;
