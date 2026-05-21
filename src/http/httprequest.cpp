@@ -117,7 +117,7 @@ int HttpRequest::ConverHex(char ch) {
 
 //处理Post请求
 void HttpRequest::ParsePost_() {
-    if (method_ == "POST" && header_["Content-Type"] == "application/x-www-from-urlencoded") {
+    if (method_ == "POST" && header_["Content-Type"] == "application/x-www-form-urlencoded") {
         ParseFromUrlencoded_(); //POST请求体示例
         if (DEFAULT_HTML_TAG.count(path_)) { //如果是登陆/注册的path
            int tag = DEFAULT_HTML_TAG.find(path_)->second;
