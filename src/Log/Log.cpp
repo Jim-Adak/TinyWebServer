@@ -163,19 +163,19 @@ void Log::write(int level, const char *format, ...) {
 void Log::AppendLogLevelTitle_(int level) {
     switch (level) {
         case 0:
-            buff_.Append("[Debug]",9);
+            buff_.Append("[debug]: ", 9);
             break;
         case 1:
-            buff_.Append("[Info]",9);
+            buff_.Append("[info] : ", 9);
             break;
         case 2:
-            buff_.Append("[Warn]",9);
+            buff_.Append("[warn] : ", 9);
             break;
         case 3:
-            buff_.Append("[Error]",9);
+            buff_.Append("[error]: ", 9);
             break;
         default:
-            buff_.Append("[Info]",9);
+            buff_.Append("[info] : ", 9);
             break;
     }
 }
