@@ -43,6 +43,10 @@ public:
         sql_ = *sql;
         connPool_ = connpool;
     }
+    ~SqlConnRAII() {
+        if (sql_)
+            connPool_->FreeConn(sql_);
+    }
 private:
     MYSQL *sql_;
     SqlConnPool *connPool_;
