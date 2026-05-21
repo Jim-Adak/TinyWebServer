@@ -156,8 +156,9 @@ void HttpRequest::ParseFromUrlencoded_() {
                 break;
             case '%':
                 num = ConverHex(body_[i+1])*16 + ConverHex(body_[i+2]);
+                body_[i + 2] = num /10 + '0';
                 body_[i + 1] = num % 10 + '0';
-                body_[i+2] = num /10 + '0';
+
                 i += 2;
                 break;
                 // 键值对连接符
