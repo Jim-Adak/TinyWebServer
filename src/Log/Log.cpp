@@ -11,6 +11,7 @@ Log::Log() {
     lineCount_ = 0;
     toDay_ = 0;
     isAsync_ = false;
+    isOpen_ = true;
 }
 
 Log::~Log() {
@@ -59,6 +60,7 @@ void Log::init(int level, const char *path, const char *suffix, int maxQueueCapa
     level_ = level;
     path_ = path;
     suffix_ = suffix;
+    isOpen_ = true;
     if (maxQueueCapacity > 0) { //异步日志
         isAsync_ = true;
         if (!deque_) { //为空则创建一个
