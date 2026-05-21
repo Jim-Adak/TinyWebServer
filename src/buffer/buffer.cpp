@@ -86,13 +86,13 @@ void Buffer::Append(const std::string& str) {
     Append(str.c_str(),str.size());
 }
 
-void Append(const void* data,size_t len) {
+void Buffer::Append(const void* data,size_t len) {
     Append(static_cast<const char*>(data),len);
 }
 
 
 //将Buffer中的读下标的地方放到该buffer中的写下标位置
-void Append(const Buffer& buff) {
+void Buffer::Append(const Buffer& buff) {
     Append(buff.Peek(),buff.ReadableBytes());
 }
 
