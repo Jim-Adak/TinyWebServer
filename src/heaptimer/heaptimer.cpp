@@ -64,7 +64,7 @@ void HeapTimer::del_(size_t index) {
 
 //调整指定id的节点
 void HeapTimer::adjust(int id, int newExpires) {
-    assert(heap_.empty() && ref_.count(id));
+    assert(!heap_.empty() && ref_.count(id));
     heap_[ref_[id]].expires = Clock::now() + MS(newExpires);
 }
 
