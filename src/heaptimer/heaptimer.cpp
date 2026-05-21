@@ -13,15 +13,14 @@ void HeapTimer::SwapNode_(size_t i, size_t j) {
 }
 
 void HeapTimer::siftup_(size_t i) {
-    assert(i >= 0 && i<heap_.size());
-    size_t parent = (i-1) / 2;
-    while(parent >= 0) {
+    assert(i <heap_.size());
+    while (i > 0) {       //用i > 0守门
+        size_t parent = (i-1) /2;
         if (heap_[parent] > heap_[i]) {
             SwapNode_(i,parent);
             i = parent;
-            parent = (i - 1) / 2;
         }else {
-            break;
+            break;        //父节点更小，已经满足小顶堆性质
         }
     }
 }
