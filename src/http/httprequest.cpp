@@ -147,7 +147,7 @@ void HttpRequest::ParseFromUrlencoded_() {
         switch (ch) {
             //key
             case '=':
-                key = body_.substr(j,i-1);
+                key = body_.substr(j,i-j);
                 j = i + 1;
                 break;
             //键值对中的空格换伟+或者20%
