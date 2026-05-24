@@ -34,7 +34,7 @@ void HttpConn::init(int fd,const sockaddr_in& addr) {
     writeBuff_.RetrieveAll();
     readBuff_.RetrieveAll();
     isClose_ = false;
-    LOG_INFO("Client[&d](&s:&d) in, userCount:%d",fd_,GetIP(),GetPort(),(int)userCount);
+    LOG_INFO("Client[%d](%s:%d) in, userCount:%d",fd_,GetIP(),GetPort(),(int)userCount);
 }
 
 void HttpConn::Close() {
@@ -43,7 +43,7 @@ void HttpConn::Close() {
         isClose_ = true;
         userCount--;
         close(fd_);
-        LOG_INFO("Client[&d](&s:&d) in, userCount:%d",fd_,GetIP(),GetPort(),(int)userCount);
+        LOG_INFO("Client[%d](%s:%d) quit, userCount:%d",fd_,GetIP(),GetPort(),(int)userCount);
     }
 }
 

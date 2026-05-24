@@ -105,7 +105,7 @@ void HttpRequest::ParseBody_(const std::string &line) {
     body_ = line;
     ParsePost_();
     state_ = FINISH; //状态转换为FINISH
-    LOG_DEBUG("Body:&s,len:%d",line.c_str(),line.size());
+    LOG_DEBUG("Body:%s,len:%d",line.c_str(),line.size());
 }
 
 //16进制转换为10进制

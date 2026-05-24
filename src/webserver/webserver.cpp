@@ -108,7 +108,7 @@ void WebServer::SendError_(int fd, const char *info) {
     assert(fd > 0);
     int ret = send(fd,info,strlen(info),0);
     if (ret < 0) {
-        LOG_WARN("send error to client[&d] error!",fd);
+        LOG_WARN("send error to client[%d] error!",fd);
     }
     close(fd);
 }
