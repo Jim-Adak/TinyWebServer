@@ -197,7 +197,6 @@ bool HttpRequest::UserVerify(const std::string &name,const std::string &pwd,bool
     snprintf(order,256,"SELECT username,password FROM user WHERE username = '%s' LIMIT 1",name.c_str());
     LOG_DEBUG("%s",order);
     if (mysql_query(sql,order)) {
-        mysql_free_result(res);
         return false;
     }
     res = mysql_store_result(sql);
