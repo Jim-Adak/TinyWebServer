@@ -15,17 +15,20 @@ Log::Log() {
 }
 
 Log::~Log() {
-    while (!deque_->empty()) {
-        deque_->flush(); //唤醒消费者，处理掉剩下的任务
+    if (writeThread_ && writeThread_->joinable()) { //进入异步
+        while (!deque_->empty()) {
+            deque_->flush(); //唤醒消费者，处理掉剩下的任务
+        }
+        deque_->Close(); //关闭队列
+        writeThread_->join(); //等待当前线程完成手中的任务
+        if (fp_) { //冲洗文件缓冲区，关闭文件描述符
+            std::lock_guard<std::mutex> locker(mtx_); //
+            flush(); //清空缓冲区中的数据
+            fclose(fp_); //关闭日志文件
+        }
     }
-    deque_->Close(); //关闭队列
-    writeThread_->join(); //等待当前线程完成手中的任务
-    if (fp_) { //冲洗文件缓冲区，关闭文件描述符
-        std::lock_guard<std::mutex> locker(mtx_); //
-        flush(); //清空缓冲区中的数据
-        fclose(fp_); //关闭日志文件
     }
-}
+
 
 //唤醒阻塞队列消费者，开始写日志
 void Log::flush() {
