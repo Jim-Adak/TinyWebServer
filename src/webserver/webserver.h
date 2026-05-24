@@ -16,9 +16,9 @@
 
 #include"../epoll/epoller.h"
 #include"../heaptimer/heaptimer.h"
-#include"../log/Log.h"
-#include"../pool/sqlconnpool.h"
-#include"../pool/ThreadPool.h"
+#include"../Log/Log.h"
+#include"../Pool/sqlconnpool.h"
+#include"../Pool/ThreadPool.h"
 #include"../http/httpconn.h"
 
 class WebServer {
