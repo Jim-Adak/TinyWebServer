@@ -21,13 +21,13 @@ Log::~Log() {
         }
         deque_->Close(); //关闭队列
         writeThread_->join(); //等待当前线程完成手中的任务
-        if (fp_) { //冲洗文件缓冲区，关闭文件描述符
-            std::lock_guard<std::mutex> locker(mtx_); //
-            flush(); //清空缓冲区中的数据
-            fclose(fp_); //关闭日志文件
-        }
     }
+    if (fp_) { //冲洗文件缓冲区，关闭文件描述符
+        std::lock_guard<std::mutex> locker(mtx_); //
+        flush(); //清空缓冲区中的数据
+        fclose(fp_); //关闭日志文件
     }
+}
 
 
 //唤醒阻塞队列消费者，开始写日志
