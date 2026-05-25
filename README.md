@@ -430,7 +430,6 @@ A：ET 触发次数少 → 减少 `epoll_wait` 返回次数 → 高并发下性�
 
 ## 参考
 
-- 原作者仓库：<https://github.com/JehanRio/TinyWebServer>
 - 陈硕《Linux 多线程服务端编程》——`Buffer` / Reactor 思想
 - 游双《Linux 高性能服务器编程》——epoll、状态机解析
 
