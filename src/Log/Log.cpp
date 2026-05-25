@@ -11,7 +11,7 @@ Log::Log() {
     lineCount_ = 0;
     toDay_ = 0;
     isAsync_ = false;
-    isOpen_ = true;
+    isOpen_ = false;
 }
 
 Log::~Log() {
